@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'javassist-plugin'
 
 android {
     compileSdkVersion 29
