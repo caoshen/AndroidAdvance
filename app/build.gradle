@@ -33,4 +33,7 @@ dependencies {
 
     // umeng
     implementation 'com.umeng.analytics:analytics:6.0.1'
+    // fresco
+    implementation 'com.facebook.fresco:fresco:2.3.0'
+
 }
