@@ -11,7 +11,7 @@ import org.gradle.api.logging.LogLevel
  */
 class JavassistInject {
 
-    public static final String JAVA_ASSIST_APP = "com.example.androidefficientadvanced.MyApp"
+    public static final String JAVA_ASSIST_APP = "com.example.androidadvance.MyApp"
 
     public static final String JAVA_ASSIST_MOBCLICK = "com.umeng.analytics.MobclickAgent"
 
