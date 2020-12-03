@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidAdvance</string>
+    <string name="rxjava_interval">interval</string>
+    <string name="count">count</string>
 </resources>
