@@ -20,7 +20,7 @@ class MutableLiveDataFragment: Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        getLiveDataA()
+
     }
 
     private val changeObserver = Observer<String> { value ->
