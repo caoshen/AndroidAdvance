@@ -16,6 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,6 +32,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    // kotlin projects
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 }
 
 dependencies {
@@ -39,6 +47,8 @@ dependencies {
     implementation 'com.umeng.analytics:analytics:6.0.1'
     // fresco
     implementation 'com.facebook.fresco:fresco:2.3.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
 
     // rxjava
     implementation deps.rx.rxjava
