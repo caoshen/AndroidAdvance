@@ -1,4 +1,4 @@
-package com.example.androidadvance.livedata
+package io.github.caoshen.androidadvance.jetpack
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidadvance.R
 
 /**
  * @author caoshen

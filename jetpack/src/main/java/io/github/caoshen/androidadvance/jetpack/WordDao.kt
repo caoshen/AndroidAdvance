@@ -1,4 +1,4 @@
-package com.example.androidadvance.livedata
+package io.github.caoshen.androidadvance.jetpack
 
 import androidx.room.Dao
 import androidx.room.Insert

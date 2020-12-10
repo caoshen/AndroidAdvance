@@ -1,23 +1,26 @@
-apply plugin: 'com.android.application'
+if (isRunAlone.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-//apply plugin: 'javassist-plugin'
-
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.androidadvance"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -26,33 +29,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    // kotlin projects
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = '1.8'
     }
-
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-
-    // umeng
-    implementation 'com.umeng.analytics:analytics:6.0.1'
-    // fresco
-    implementation 'com.facebook.fresco:fresco:2.3.0'
-
-    implementation 'com.android.support:multidex:1.0.3'
-
-    // rxjava
-    implementation deps.rx.rxjava
-    implementation deps.rx.rxandroid
-
     // Room components
     implementation deps.room.roomKtx
     kapt deps.room.roomCompiler
@@ -79,11 +65,11 @@ dependencies {
     // Testing
     testImplementation deps.testing.junit
     androidTestImplementation deps.testing.coreTesting
-    androidTestImplementation (deps.testing.espressoCore, {
+    androidTestImplementation(deps.testing.espressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation deps.testing.testExtJunit
-}
-repositories {
-    mavenCentral()
+
+    // multidex
+    implementation 'com.android.support:multidex:1.0.3'
 }
