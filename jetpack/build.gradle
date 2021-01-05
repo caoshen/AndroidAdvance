@@ -39,6 +39,12 @@ android {
 }
 
 dependencies {
+    // Work manager
+    implementation deps.workmanager.workRuntimeKtx
+    implementation deps.workmanager.workRxjava2
+    implementation deps.workmanager.workGcm
+    androidTestImplementation deps.workmanager.workTesting
+
     // Room components
     implementation deps.room.roomKtx
     kapt deps.room.roomCompiler

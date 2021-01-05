@@ -14,6 +14,8 @@ ext {
             junitVersion           : '4.13.1',
             espressoVersion        : '3.1.0',
             androidxJunitVersion   : '1.1.2',
+            // work manager
+            workVersion            : '2.4.0'
     ]
 
     deps = [
@@ -47,6 +49,12 @@ ext {
                     'coreTesting' : "androidx.arch.core:core-testing:$versions.coreTestingVersion",
                     'espressoCore': "androidx.test.espresso:espresso-core:$versions.espressoVersion",
                     'testExtJunit': "androidx.test.ext:junit:$versions.androidxJunitVersion"
+            ],
+            'workmanager' : [
+                'workRuntimeKtx' : "androidx.work:work-runtime-ktx:$versions.workVersion",
+                'workRxjava2' : "androidx.work:work-rxjava2:$versions.workVersion",
+                'workGcm' : "androidx.work:work-gcm:$versions.workVersion",
+                'workTesting' : "androidx.work:work-testing:$versions.workVersion",
             ]
     ]
 }

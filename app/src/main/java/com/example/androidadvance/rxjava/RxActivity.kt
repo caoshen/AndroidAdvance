@@ -5,13 +5,12 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidadvance.R
+import com.example.androidadvance.databinding.ActivityRxBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_rx.*
-import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
 /**
@@ -27,9 +26,13 @@ class RxActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var compositeDisposable: CompositeDisposable
 
+    private lateinit var binding: ActivityRxBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rx)
+        binding = ActivityRxBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         compositeDisposable = CompositeDisposable()
     }
 
@@ -41,7 +44,7 @@ class RxActivity : AppCompatActivity(), View.OnClickListener {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { t ->
                             Log.d(TAG, "onClick: interval:$t")
-                            text_count.text = t.toString()
+                            binding.textCount.text = t.toString()
                         }
                 compositeDisposable.add(disposable!!)
             }
