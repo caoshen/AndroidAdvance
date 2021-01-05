@@ -1,11 +1,10 @@
-package com.example.androidadvance.rxjava
+package io.github.caoshen.androidadvance.rxjava
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androidadvance.R
-import com.example.androidadvance.databinding.ActivityRxBinding
+import io.github.caoshen.androidadvance.rxjava.databinding.ActivityRxBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
