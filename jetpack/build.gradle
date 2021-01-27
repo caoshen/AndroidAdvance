@@ -36,6 +36,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -78,4 +82,8 @@ dependencies {
 
     // multidex
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation deps.network.retrofit
+    implementation deps.network.converterGson
+    implementation deps.fragment.fragmentKtx
 }

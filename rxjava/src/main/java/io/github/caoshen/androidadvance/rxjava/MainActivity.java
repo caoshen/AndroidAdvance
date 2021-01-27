@@ -7,12 +7,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 
@@ -23,11 +26,16 @@ import io.reactivex.functions.BiFunction;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity-rx";
+    private CompositeDisposable mCompositeDisposable;
+    private ObservableEmitter<BigInteger> mEmitter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        testRx();
+        mCompositeDisposable = new CompositeDisposable();
+//        testRx();
+//        testCache();
+        testInfinite();
     }
 
     private void testRx() {
@@ -95,5 +103,44 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         Observable<String> zip = Observable.zip(observable1, observable2, zipper);
+    }
+
+    public void testCache() {
+        Observable<Object> ints = Observable.create(emitter -> {
+            Log.d(TAG, "create");
+            emitter.onNext(42);
+            emitter.onComplete();
+        }).cache();
+        Log.d(TAG, "starting");
+        Disposable subscribe = ints.subscribe(i -> Log.d(TAG, "testCache: Element A:" + i));
+        Disposable subscribe1 = ints.subscribe(i -> Log.d(TAG, "testCache: Element B:" + i));
+        Log.d(TAG, "testCache: exit");
+        mCompositeDisposable.add(subscribe);
+        mCompositeDisposable.add(subscribe1);
+    }
+
+    public void testInfinite() {
+        Observable<BigInteger> naturalNumbers = Observable.create(emitter -> {
+            mEmitter = emitter;
+            BigInteger i = BigInteger.ZERO;
+            while (!emitter.isDisposed()) {
+                emitter.onNext(i);
+                i = i.add(BigInteger.ONE);
+            }
+        });
+        Disposable subscribe = naturalNumbers.subscribe(x -> Log.d(TAG, "testInfinite: " + x));
+        mCompositeDisposable.add(subscribe);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.dispose();
+        }
+    }
+
+    Observable<String> rxLoad(int id) {
+        return Observable.fromCallable(() -> "" + id);
     }
 }

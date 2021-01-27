@@ -15,7 +15,11 @@ ext {
             espressoVersion        : '3.1.0',
             androidxJunitVersion   : '1.1.2',
             // work manager
-            workVersion            : '2.4.0'
+            workVersion            : '2.4.0',
+            // Retrofit requires at minimum Java 8+ or Android API 21+.
+            retrofit    : '2.9.0',
+            // fragment
+            fragmentKtx: '1.1.0'
     ]
 
     deps = [
@@ -55,6 +59,13 @@ ext {
                 'workRxjava2' : "androidx.work:work-rxjava2:$versions.workVersion",
                 'workGcm' : "androidx.work:work-gcm:$versions.workVersion",
                 'workTesting' : "androidx.work:work-testing:$versions.workVersion",
+            ],
+            'network': [
+                    'retrofit': "com.squareup.retrofit2:retrofit:$versions.retrofit",
+                    'converterGson': "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+            ],
+            'fragment': [
+                    'fragmentKtx': "androidx.fragment:fragment-ktx:$versions.fragmentKtx"
             ]
     ]
 }
