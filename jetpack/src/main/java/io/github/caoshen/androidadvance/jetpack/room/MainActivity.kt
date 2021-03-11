@@ -1,4 +1,4 @@
-package io.github.caoshen.androidadvance.jetpack
+package io.github.caoshen.androidadvance.jetpack.room
 
 import android.app.Activity
 import android.content.Intent
@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import io.github.caoshen.androidadvance.jetpack.R
 
 /**
  * @author caoshen

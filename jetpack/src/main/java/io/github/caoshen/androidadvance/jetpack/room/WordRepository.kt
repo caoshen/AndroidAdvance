@@ -1,4 +1,4 @@
-package io.github.caoshen.androidadvance.jetpack
+package io.github.caoshen.androidadvance.jetpack.room
 
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow

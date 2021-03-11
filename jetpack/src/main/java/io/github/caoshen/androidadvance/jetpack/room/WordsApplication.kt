@@ -1,4 +1,4 @@
-package io.github.caoshen.androidadvance.jetpack
+package io.github.caoshen.androidadvance.jetpack.room
 
 import android.app.Application
 import kotlinx.coroutines.CoroutineScope

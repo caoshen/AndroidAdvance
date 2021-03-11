@@ -1,4 +1,4 @@
-package io.github.caoshen.androidadvance.jetpack
+package io.github.caoshen.androidadvance.jetpack.room
 
 import android.app.Activity
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import io.github.caoshen.androidadvance.jetpack.R
 
 /**
  * @author caoshen
