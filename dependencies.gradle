@@ -66,6 +66,11 @@ ext {
             ],
             'fragment': [
                     'fragmentKtx': "androidx.fragment:fragment-ktx:$versions.fragmentKtx"
+            ],
+            'arouter': [
+                    'api': "com.alibaba:arouter-api:$versions.arouterApi",
+                    'compiler': "com.alibaba",
+                    'annotation': ""
             ]
     ]
 }

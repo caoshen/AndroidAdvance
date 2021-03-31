@@ -1,3 +1,5 @@
+include ':native'
+include ':common'
 include ':rxjava'
 include ':jetpack'
 include ':javassist-gradle-plugin'

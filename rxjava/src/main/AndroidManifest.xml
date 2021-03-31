@@ -3,7 +3,7 @@
     package="io.github.caoshen.androidadvance.rxjava">
 
     <application android:theme="@style/Theme.AppCompat">
-        <activity android:name=".MainActivity">
+        <activity android:name=".RxLifecycleMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
