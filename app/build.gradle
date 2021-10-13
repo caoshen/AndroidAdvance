@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 //apply plugin: 'javassist-plugin'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
     buildToolsVersion "29.0.2"
 
     defaultConfig {
@@ -37,8 +37,8 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
     }
 
 }

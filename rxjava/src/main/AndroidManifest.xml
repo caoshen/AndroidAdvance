@@ -4,6 +4,12 @@
 
     <application android:theme="@style/Theme.AppCompat">
         <activity android:name=".RxLifecycleMainActivity">
+
+        </activity>
+
+        <activity
+            android:name=".RxActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
