@@ -19,7 +19,9 @@ ext {
             // Retrofit requires at minimum Java 8+ or Android API 21+.
             retrofit    : '2.9.0',
             // fragment
-            fragmentKtx: '1.1.0'
+            fragmentKtx: '1.1.0',
+            // livedata eventbus
+            liveEventbus: '1.8.0'
     ]
 
     deps = [
@@ -71,6 +73,7 @@ ext {
                     'api': "com.alibaba:arouter-api:$versions.arouterApi",
                     'compiler': "com.alibaba",
                     'annotation': ""
-            ]
+            ],
+            'livedataEventbus': "io.github.jeremyliao:live-event-bus-x:$versions.liveEventbus"
     ]
 }
