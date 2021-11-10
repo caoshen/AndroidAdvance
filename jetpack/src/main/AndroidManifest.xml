@@ -18,11 +18,13 @@
         </activity>
         <activity android:name=".room.NewWordActivity" />
         <activity android:name=".retrofit.RetrofitMainActivity">
+        </activity>
+        <activity android:name=".ui.FastMainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 </manifest>
