@@ -5,7 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 
-public class BaseApp : Application() {
+open class BaseApp : Application() {
     companion object {
         lateinit var instance: BaseApp
             private set
