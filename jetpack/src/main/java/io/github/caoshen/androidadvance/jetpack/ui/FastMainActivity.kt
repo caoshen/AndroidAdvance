@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import by.kirich1409.viewbindingdelegate.viewBinding
 import io.github.caoshen.androidadvance.jetpack.R
 import io.github.caoshen.androidadvance.jetpack.databinding.ActivityFastMainBinding
+import io.github.caoshen.androidadvance.jetpack.livedata.TimerGlobalLiveData
 import io.github.caoshen.baselib.base.BaseActivity
 import io.github.caoshen.baselib.utils.startActivity
 import io.github.caoshen.baselib.utils.toast
@@ -48,7 +49,8 @@ class FastMainActivity : BaseActivity(R.layout.activity_fast_main) {
         }
 
         mBinding.btnStartTimer.setOnClickListener {
-
+            TimerGlobalLiveData.get().startTimer()
+            toast("start timer.")
         }
     }
 

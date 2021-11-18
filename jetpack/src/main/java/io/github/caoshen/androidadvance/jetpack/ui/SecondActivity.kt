@@ -10,6 +10,7 @@ import io.github.caoshen.androidadvance.jetpack.R
 import io.github.caoshen.androidadvance.jetpack.databinding.ActivitySecondBinding
 import io.github.caoshen.androidadvance.jetpack.livedata.RequestPermissionLiveData
 import io.github.caoshen.androidadvance.jetpack.livedata.TakePhotoLiveData
+import io.github.caoshen.androidadvance.jetpack.livedata.TimerGlobalLiveData
 import io.github.caoshen.baselib.base.BaseActivity
 import io.github.caoshen.baselib.utils.toast
 
@@ -58,5 +59,15 @@ class SecondActivity : BaseActivity(R.layout.activity_second) {
         mBinding.btnRequestPermissionLivedata.setOnClickListener {
             mRequestPermissionLiveData.requestPermission(Manifest.permission.RECORD_AUDIO)
         }
+
+        // global timer live data
+        TimerGlobalLiveData.get().observe(this) {
+            toast("value $it")
+        }
+        mBinding.btnStopTimer.setOnClickListener {
+            TimerGlobalLiveData.get().stopTimer()
+            toast("stop global timer.")
+        }
+
     }
 }
