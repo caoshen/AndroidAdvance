@@ -14,4 +14,6 @@
     <string name="request_permission">请求位置权限</string>
     <string name="request_permission_livedata">请求录音权限livedata</string>
     <string name="stop_timer">停止全局定时器</string>
+    <string name="hint_input_name">请输入名字</string>
+    <string name="submit">提交</string>
 </resources>
