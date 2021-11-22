@@ -18,6 +18,8 @@ ext {
             workVersion            : '2.4.0',
             // Retrofit requires at minimum Java 8+ or Android API 21+.
             retrofit    : '2.9.0',
+            // logging interceptor
+            loggingInterceptor: '4.9.0',
             // fragment
             fragmentKtx: '1.1.0',
             // livedata eventbus
@@ -67,7 +69,8 @@ ext {
             ],
             'network': [
                     'retrofit': "com.squareup.retrofit2:retrofit:$versions.retrofit",
-                    'converterGson': "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+                    'converterGson': "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+                    'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptor"
             ],
             'fragment': [
                     'fragmentKtx': "androidx.fragment:fragment-ktx:$versions.fragmentKtx"

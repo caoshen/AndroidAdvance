@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="buttonLabel">#FFFFFF</color>
+    <color name="bg_api_fragment">#3ff0</color>
 </resources>

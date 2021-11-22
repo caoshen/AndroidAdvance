@@ -39,6 +39,9 @@ dependencies {
     implementation deps.livedataEventbus
     implementation deps.network.retrofit
     implementation deps.network.converterGson
+    implementation deps.network.loggingInterceptor
+    implementation deps.kotlin.coroutinesCore
+
     api deps.viewbindingdelegate
 
     testImplementation 'junit:junit:4.+'
