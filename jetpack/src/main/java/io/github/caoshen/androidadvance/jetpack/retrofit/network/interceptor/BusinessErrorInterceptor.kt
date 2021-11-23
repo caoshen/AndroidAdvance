@@ -19,7 +19,8 @@ class BusinessErrorInterceptor : Interceptor {
             return response
         }
 
-        val responseBody = response.body()!!
+        val responseBody = response.body ?: return response
+
         val source = responseBody.source()
         source.request(Long.MAX_VALUE)
         val buffer = source.buffer

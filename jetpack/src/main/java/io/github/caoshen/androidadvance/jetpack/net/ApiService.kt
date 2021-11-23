@@ -4,5 +4,5 @@ import io.github.caoshen.baselib.network.entity.ApiResponse
 
 interface ApiService {
 
-    suspend fun getWxArticle(): ApiResponse<List<>>
+//    suspend fun getWxArticle(): ApiResponse<List<>>
 }

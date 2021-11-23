@@ -15,10 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
-        </activity>
-        <activity android:name="io.github.caoshen.androidadvance.rxjava.RxActivity" >
-        </activity>
+        <provider
+            android:name=".provider.DeviceProvider"
+            android:authorities="${applicationId}.provider.device"
+            android:exported="true"
+            android:process=":core"
+            android:readPermission="${applicationId}.READ_DEVICE_PROVIDER"
+            android:writePermission="${applicationId}.WRITE_DEVICE_PROVIDER" />
     </application>
 
 </manifest>
