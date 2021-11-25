@@ -16,4 +16,10 @@
     <string name="stop_timer">停止全局定时器</string>
     <string name="hint_input_name">请输入名字</string>
     <string name="submit">提交</string>
+    <string name="login">登录</string>
+    <string name="mediator_net">多数据源-网络</string>
+    <string name="mediator_db">多数据源-数据库</string>
+    <string name="net_request">请求网络</string>
+    <string name="net_request_error">请求网络错误</string>
+    <string name="net_request_result">网络请求结果</string>
 </resources>

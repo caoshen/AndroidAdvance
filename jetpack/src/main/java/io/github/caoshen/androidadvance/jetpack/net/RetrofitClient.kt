@@ -4,9 +4,11 @@ import io.github.caoshen.baselib.network.base.BaseRetrofitClient
 import okhttp3.OkHttpClient
 
 object RetrofitClient : BaseRetrofitClient() {
-    override fun handleBuilder(builder: OkHttpClient.Builder) {
-        TODO("Not yet implemented")
+
+    val service by lazy {
+        getService(ApiService::class.java, ApiService.BASE_URL)
     }
 
+    override fun handleBuilder(builder: OkHttpClient.Builder) = Unit
 
 }
