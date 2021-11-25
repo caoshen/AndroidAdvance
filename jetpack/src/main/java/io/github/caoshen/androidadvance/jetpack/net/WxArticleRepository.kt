@@ -4,6 +4,7 @@ import io.github.caoshen.androidadvance.jetpack.bean.User
 import io.github.caoshen.androidadvance.jetpack.bean.WxArticleBean
 import io.github.caoshen.baselib.network.base.BaseRepository
 import io.github.caoshen.baselib.network.entity.ApiResponse
+import io.github.caoshen.baselib.network.entity.ApiSuccessResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -37,6 +38,6 @@ class WxArticleRepository : BaseRepository() {
     private suspend fun getWxArticleFromDatabase(): ApiResponse<List<WxArticleBean>> =
         withContext(Dispatchers.IO) {
             val wxArticleBean = WxArticleBean(999, "zhangsan", 1)
-            ApiResponse(arrayListOf(wxArticleBean))
+            ApiSuccessResponse(arrayListOf(wxArticleBean))
         }
 }

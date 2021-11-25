@@ -1,5 +1,6 @@
 package io.github.caoshen.baselib.network.base
 
+import android.util.Log
 import io.github.caoshen.baselib.BuildConfig
 import io.github.caoshen.baselib.network.entity.*
 import io.github.caoshen.baselib.network.entity.handlingExceptions

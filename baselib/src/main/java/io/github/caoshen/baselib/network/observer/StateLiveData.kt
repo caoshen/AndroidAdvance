@@ -13,7 +13,7 @@ class StateLiveData<T> : MutableLiveData<ApiResponse<T>>() {
                 listener.mCompleteListenerAction?.invoke()
             }
 
-            override fun onError(error: Throwable) {
+            override fun onException(error: Throwable) {
                 listener.mErrorListenerAction?.invoke(error)
             }
 
@@ -52,7 +52,7 @@ class StateLiveData<T> : MutableLiveData<ApiResponse<T>>() {
             mFailedListenerAction = action
         }
 
-        fun onError(action: (Throwable) -> Unit) {
+        fun onException(action: (Throwable) -> Unit) {
             mErrorListenerAction = action
         }
 

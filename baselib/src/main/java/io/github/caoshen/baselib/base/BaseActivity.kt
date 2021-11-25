@@ -45,7 +45,7 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
 
     private fun observeToast() {
         LiveEventBus.get<String>(SHOW_TOAST).observe(this) {
-            toast(it)
+            toast("$it in ${javaClass.simpleName}")
         }
     }
 

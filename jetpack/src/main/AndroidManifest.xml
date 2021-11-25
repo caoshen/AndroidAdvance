@@ -29,5 +29,6 @@
         </activity>
         <activity android:name=".ui.SecondActivity" />
         <activity android:name=".ui.SavedStateActivity" />
+        <activity android:name=".ui.ApiActivity" />
     </application>
 </manifest>

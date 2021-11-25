@@ -1,5 +1,6 @@
 package io.github.caoshen.baselib.network.entity
 
+import android.util.Log
 import com.google.gson.JsonParseException
 import io.github.caoshen.baselib.network.utils.toast
 import retrofit2.HttpException
@@ -26,7 +27,7 @@ internal fun handlingApiExceptions(errorCode: Int?, errorMsg: String?) = when (e
 
 internal fun handlingExceptions(e: Throwable) = when (e) {
     is HttpException -> {
-        toast(e.message())
+        toast("Http exception: ${e.message()}")
     }
     is CancellationException -> {
         toast(e.toString())

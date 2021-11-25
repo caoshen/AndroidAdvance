@@ -10,7 +10,7 @@ abstract class IStateObserver<T> : Observer<ApiResponse<T>> {
             is ApiSuccessResponse -> onSuccess(apiResponse.response)
             is ApiEmptyResponse -> onDataEmpty()
             is ApiFailedResponse -> onFailed(apiResponse.errorCode, apiResponse.errorMsg)
-            is ApiErrorResponse -> onError(apiResponse.error)
+            is ApiErrorResponse -> onException(apiResponse.error)
             else -> {
 
             }
@@ -20,7 +20,7 @@ abstract class IStateObserver<T> : Observer<ApiResponse<T>> {
 
     abstract fun onComplete()
 
-    abstract fun onError(error: Throwable)
+    abstract fun onException(error: Throwable)
 
     abstract fun onFailed(errorCode: Int?, errorMsg: String?)
 

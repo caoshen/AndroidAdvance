@@ -54,7 +54,7 @@
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:text="@string/net_request_result"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_net_error" />
