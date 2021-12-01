@@ -60,6 +60,10 @@ class FastMainActivity : BaseActivity(R.layout.activity_fast_main) {
             TimerGlobalLiveData.get().startTimer()
             toast("start timer.")
         }
+
+        mBinding.btnLivedata.setOnClickListener {
+            startActivity<NameActivity>()
+        }
     }
 
 }
