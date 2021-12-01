@@ -22,4 +22,6 @@
     <string name="net_request">请求网络</string>
     <string name="net_request_error">请求网络错误</string>
     <string name="net_request_result">网络请求结果</string>
+    <string name="zero">0</string>
+    <string name="plus_one">+1</string>
 </resources>

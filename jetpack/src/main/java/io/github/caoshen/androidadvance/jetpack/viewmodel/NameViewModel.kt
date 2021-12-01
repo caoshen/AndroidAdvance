@@ -1,0 +1,20 @@
+package io.github.caoshen.androidadvance.jetpack.viewmodel
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+
+class NameViewModel : ViewModel() {
+    val currentName: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    fun onUserClick() {
+        val cur: String? = currentName.value
+        val next: Int = if (cur != null) {
+            cur.toInt() + 1
+        } else {
+            1
+        }
+        currentName.value = next.toString()
+    }
+}
