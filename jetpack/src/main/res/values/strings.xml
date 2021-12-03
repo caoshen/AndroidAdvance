@@ -25,4 +25,7 @@
     <string name="zero">0</string>
     <string name="plus_one">+1</string>
     <string name="livedata">LiveData</string>
+    <string name="focus_gain_a">FOCUS GAIN A</string>
+    <string name="focus_gain_b">FOCUS GAIN TRANSIENT B</string>
+    <string name="audio_focus">音频焦点</string>
 </resources>

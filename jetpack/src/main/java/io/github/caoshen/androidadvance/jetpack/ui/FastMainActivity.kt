@@ -64,6 +64,10 @@ class FastMainActivity : BaseActivity(R.layout.activity_fast_main) {
         mBinding.btnLivedata.setOnClickListener {
             startActivity<NameActivity>()
         }
+
+        mBinding.btnAudioFocus.setOnClickListener {
+            startActivity<AudioFocusActivity>()
+        }
     }
 
 }

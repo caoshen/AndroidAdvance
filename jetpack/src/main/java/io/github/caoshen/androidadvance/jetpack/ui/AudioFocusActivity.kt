@@ -7,14 +7,16 @@ import android.media.AudioManager.OnAudioFocusChangeListener
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import io.github.caoshen.androidadvance.jetpack.R
+import io.github.caoshen.androidadvance.jetpack.databinding.ActivityAudioFocusBinding
 
 
-class AudioFocusActivity : AppCompatActivity() {
+class AudioFocusActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         private const val TAG = "AudioFocusActivity"
     }
+
+    private lateinit var binding: ActivityAudioFocusBinding
 
     /*
      * AUDIOFOCUS_GAIN -> AUDIOFOCUS_LOSS
@@ -22,10 +24,6 @@ class AudioFocusActivity : AppCompatActivity() {
      * AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE <-> AUDIOFOCUS_LOSS_TRANSIENT
      * AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK <-> AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK
      */
-    private lateinit var button1: Button
-
-    private lateinit var button2: Button
-
     private lateinit var audioManager: AudioManager
 
     private val afChangeListener1 =
@@ -87,47 +85,54 @@ class AudioFocusActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityAudioFocusBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         grantPermission()
     }
 
     private fun grantPermission() {
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-//        button1 = findViewById<View>(R.id.button1) as Button
-//        button1.setOnClickListener(this)
-//        button2 = findViewById<View>(R.id.button2) as Button
-//        button2.setOnClickListener(this)
+
+        binding.btn1.setOnClickListener(this)
+        binding.btn2.setOnClickListener(this)
     }
 
-//    fun onClick(v: View) {
-//        var result = AudioManager.AUDIOFOCUS_REQUEST_FAILED
-//        when (v.getId()) {
-//            R.id.button1 -> {
-//                result = audioManager!!.requestAudioFocus(
-//                    afChangeListener1,
-//                    AudioManager.STREAM_MUSIC,
-//                    AudioManager.AUDIOFOCUS_GAIN
-//                )
-//                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-//                    afChangeListener1.onAudioFocusChange(AudioManager.AUDIOFOCUS_GAIN)
-//                }
-//            }
-//            R.id.button2 -> {
-//                result = audioManager!!.requestAudioFocus(
-//                    afChangeListener2,
-//                    AudioManager.STREAM_MUSIC,
-//                    AudioManager.AUDIOFOCUS_GAIN_TRANSIENT
-//                )
-//                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-//                    afChangeListener2.onAudioFocusChange(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
-//                }
-//                result = audioManager!!.abandonAudioFocus(afChangeListener2)
+    override fun onClick(v: View) {
+        var result: Int
+        when (v.id) {
+            R.id.btn_1 -> {
+                result = audioManager.requestAudioFocus(
+                    afChangeListener1,
+                    AudioManager.STREAM_MUSIC,
+                    AudioManager.AUDIOFOCUS_GAIN
+                )
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    afChangeListener1.onAudioFocusChange(AudioManager.AUDIOFOCUS_GAIN)
+                }
+            }
+
+            R.id.btn_2 -> {
+                result = audioManager.requestAudioFocus(
+                    afChangeListener2,
+                    AudioManager.STREAM_MUSIC,
+                    AudioManager.AUDIOFOCUS_GAIN_TRANSIENT
+                )
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    afChangeListener2.onAudioFocusChange(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
+                }
+
+//                // abandon audio request
+//                result = audioManager.abandonAudioFocus(afChangeListener2)
 //                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 //                    afChangeListener2.onAudioFocusChange(AudioManager.AUDIOFOCUS_LOSS)
 //                }
-//            }
-//            else -> {
-//            }
-//        }
-//    }
+
+            }
+
+            else -> {
+                Log.e(TAG, "unknown view.")
+            }
+        }
+    }
 }

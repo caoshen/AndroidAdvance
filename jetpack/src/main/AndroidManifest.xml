@@ -32,5 +32,6 @@
         <activity android:name=".ui.ApiActivity" />
         <activity android:name=".ui.NameActivity">
         </activity>
+        <activity android:name=".ui.AudioFocusActivity"/>
     </application>
 </manifest>
