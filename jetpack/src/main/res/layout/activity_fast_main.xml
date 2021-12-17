@@ -58,4 +58,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_livedata" />
+
+    <Button
+        android:id="@+id/btn_kotlin_coroutines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/kotlin_coroutines"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_audio_focus" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

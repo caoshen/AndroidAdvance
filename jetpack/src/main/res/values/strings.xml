@@ -28,4 +28,6 @@
     <string name="focus_gain_a">FOCUS GAIN A</string>
     <string name="focus_gain_b">FOCUS GAIN TRANSIENT B</string>
     <string name="audio_focus">音频焦点</string>
+    <string name="running_thread">running thread</string>
+    <string name="kotlin_coroutines">kotlin协程</string>
 </resources>

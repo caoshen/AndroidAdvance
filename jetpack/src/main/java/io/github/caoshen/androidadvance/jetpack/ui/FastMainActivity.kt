@@ -68,6 +68,10 @@ class FastMainActivity : BaseActivity(R.layout.activity_fast_main) {
         mBinding.btnAudioFocus.setOnClickListener {
             startActivity<AudioFocusActivity>()
         }
+
+        mBinding.btnKotlinCoroutines.setOnClickListener {
+            startActivity<CoroutinesActivity>()
+        }
     }
 
 }
