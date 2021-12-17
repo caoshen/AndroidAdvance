@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import io.github.caoshen.androidadvance.jetpack.databinding.ActivityNameBinding
 import io.github.caoshen.androidadvance.jetpack.viewmodel.NameViewModel
+import io.github.caoshen.baselib.utils.startActivity
 
 class NameActivity : AppCompatActivity() {
     companion object {
@@ -29,13 +30,27 @@ class NameActivity : AppCompatActivity() {
         }
 
         binding.btnClick.setOnClickListener {
-            nameViewModel.onUserClick()
+//            nameViewModel.onUserClick()
+            nameViewModel.userClickOnButton()
         }
 
         // stock livedata sample
         nameViewModel.stockLiveData.observe(this) { price ->
             Log.d(TAG, "price:$price")
         }
+
+        nameViewModel.userIdSwitch.observe(this) { id ->
+            Log.d(TAG, "id:$id")
+        }
+
+        nameViewModel.navigateToDetails.observe(this) {
+            Log.d(TAG, "is navigate:$it")
+            if (it) {
+                Log.d(TAG, "go to details")
+                startActivity<DetailsActivity>()
+            }
+        }
+
     }
 
     override fun onResume() {
