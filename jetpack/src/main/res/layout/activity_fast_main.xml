@@ -68,4 +68,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_audio_focus" />
 
+    <Button
+        android:id="@+id/btn_workmanager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/workmanager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_kotlin_coroutines" />
 </androidx.constraintlayout.widget.ConstraintLayout>

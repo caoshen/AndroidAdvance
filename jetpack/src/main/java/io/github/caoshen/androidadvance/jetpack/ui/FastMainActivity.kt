@@ -10,6 +10,7 @@ import io.github.caoshen.androidadvance.jetpack.R
 import io.github.caoshen.androidadvance.jetpack.databinding.ActivityFastMainBinding
 import io.github.caoshen.androidadvance.jetpack.livedata.NetworkWatchLiveData
 import io.github.caoshen.androidadvance.jetpack.livedata.TimerGlobalLiveData
+import io.github.caoshen.androidadvance.jetpack.workmanager.WorkManagerActivity
 import io.github.caoshen.baselib.base.BaseActivity
 import io.github.caoshen.baselib.utils.startActivity
 import io.github.caoshen.baselib.utils.toast
@@ -71,6 +72,13 @@ class FastMainActivity : BaseActivity(R.layout.activity_fast_main) {
 
         mBinding.btnKotlinCoroutines.setOnClickListener {
             startActivity<CoroutinesActivity>()
+        }
+
+        mBinding.btnWorkmanager.setOnClickListener {
+            startActivity<WorkManagerActivity>()
+        }
+
+        with(mBinding.btnWorkmanager) {
         }
     }
 
