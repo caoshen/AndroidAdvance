@@ -85,7 +85,12 @@ dependencies {
 
     implementation deps.network.retrofit
     implementation deps.network.converterGson
+    implementation deps.network.adapterRxjava
     implementation deps.fragment.fragmentKtx
+
+    // rxjava
+    implementation deps.rx.rxjava
+    implementation deps.rx.rxandroid
 
     implementation project(':baselib')
 }
