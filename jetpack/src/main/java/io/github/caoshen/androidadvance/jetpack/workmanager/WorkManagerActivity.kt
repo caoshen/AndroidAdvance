@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.*
+import java.util.concurrent.TimeUnit
 
 /**
  * @author caoshen
@@ -19,13 +20,22 @@ class WorkManagerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.e(TAG, "onCreate")
 
-//        val uploadWorkRequest: WorkRequest = OneTimeWorkRequestBuilder<UploadWorker>()
-//            .build()
+        val compressRequest = OneTimeWorkRequestBuilder<CompressWorker>().build()
+        val updateLocalRequest = OneTimeWorkRequestBuilder<UpdateLocalWorker>().build()
 
-        val uploadWorkRequest = buildConstraintsRequest()
+        val oneTimeRequest = OneTimeWorkRequestBuilder<OneTimeWorker>().build()
+        val uploadWorkRequest = OneTimeWorkRequestBuilder<UploadWorker>().build()
+
+        val lastWorkRequest = OneTimeWorkRequestBuilder<UploadWorker>().build()
 
         val workManager: WorkManager = WorkManager.getInstance(this)
-        workManager.enqueue(uploadWorkRequest)
+        val workContinuation1 = workManager.beginWith(compressRequest)
+            .then(updateLocalRequest)
+        val workContinuation2 = workManager.beginWith(oneTimeRequest)
+            .then(uploadWorkRequest)
+        WorkContinuation.combine(listOf(workContinuation1, workContinuation2))
+            .then(lastWorkRequest)
+            .enqueue()
 
 //        2021-12-28 17:20:33.989 9202-9202 E/WorkManagerActivity: onCreate
 //        2021-12-28 17:20:34.048 9202-9202 E/WorkManagerActivity: ENQUEUED
@@ -60,6 +70,11 @@ class WorkManagerActivity : AppCompatActivity() {
             }
     }
 
+    fun buildPeriodicRequest(): WorkRequest {
+        return PeriodicWorkRequestBuilder<UploadWorker>(15L, TimeUnit.MINUTES)
+            .build()
+    }
+
     fun buildOneTimeRequest(): WorkRequest {
         return OneTimeWorkRequestBuilder<OneTimeWorker>()
             .build()
@@ -78,7 +93,7 @@ class WorkManagerActivity : AppCompatActivity() {
             .build()
     }
 
-    fun buildConstraintsRequest(): WorkRequest {
+    fun buildConstraintsRequest(): OneTimeWorkRequest {
         val constraints = buildConstraints()
         return OneTimeWorkRequestBuilder<OneTimeWorker>()
             .setConstraints(constraints)
