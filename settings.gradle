@@ -6,3 +6,4 @@ include ':javassist-gradle-plugin'
 include ':app'
 rootProject.name = "AndroidAdvance"
 include ':baselib'
+include ':kotlin'
