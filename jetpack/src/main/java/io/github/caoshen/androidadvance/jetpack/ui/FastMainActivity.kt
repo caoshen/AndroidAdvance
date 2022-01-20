@@ -1,7 +1,13 @@
 package io.github.caoshen.androidadvance.jetpack.ui
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
+import android.os.IBinder
+import android.os.Message
+import android.os.Messenger
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -78,7 +84,8 @@ class FastMainActivity : BaseActivity(R.layout.activity_fast_main) {
             startActivity<WorkManagerActivity>()
         }
 
-        with(mBinding.btnWorkmanager) {
+        mBinding.btnRecordService.setOnClickListener {
+            startActivity<RecordActivity>()
         }
     }
 

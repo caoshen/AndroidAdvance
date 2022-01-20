@@ -30,11 +30,11 @@
         <activity android:name=".ui.SecondActivity" />
         <activity android:name=".ui.SavedStateActivity" />
         <activity android:name=".ui.ApiActivity" />
-        <activity android:name=".ui.NameActivity">
-        </activity>
-        <activity android:name=".ui.AudioFocusActivity"/>
+        <activity android:name=".ui.NameActivity"></activity>
+        <activity android:name=".ui.AudioFocusActivity" />
         <activity android:name=".ui.DetailsActivity" />
         <activity android:name=".ui.CoroutinesActivity" />
         <activity android:name=".workmanager.WorkManagerActivity" />
+        <activity android:name=".ui.RecordActivity" />
     </application>
 </manifest>

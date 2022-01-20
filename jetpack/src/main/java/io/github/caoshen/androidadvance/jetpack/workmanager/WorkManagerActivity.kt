@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.*
+import io.github.caoshen.baselib.utils.Capability
+import io.github.caoshen.baselib.utils.DeviceUtils
 import java.util.concurrent.TimeUnit
 
 /**
@@ -68,6 +70,12 @@ class WorkManagerActivity : AppCompatActivity() {
                     }
                 }
             }
+
+        println(DeviceUtils.getDeviceId(this, object : Capability() {
+            override fun getOaid(): String {
+                return ""
+            }
+        }))
     }
 
     fun buildPeriodicRequest(): WorkRequest {

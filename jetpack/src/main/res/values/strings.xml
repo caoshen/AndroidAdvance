@@ -31,4 +31,5 @@
     <string name="running_thread">running thread</string>
     <string name="kotlin_coroutines">kotlin协程</string>
     <string name="workmanager">WorkManager</string>
+    <string name="record_service">录音服务</string>
 </resources>
