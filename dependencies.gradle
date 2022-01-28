@@ -28,7 +28,7 @@ ext {
             // view binding
             viewbindingdelegate    : '1.4.6',
             // preferences
-            preference : '1.1.1'
+            preference             : '1.1.1'
     ]
 
     deps = [
@@ -52,6 +52,7 @@ ext {
                     'stdlibJdk7'       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
                     'coroutinesCore'   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
                     'coroutinesAndroid': "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
+                    'reflect'          : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
             ],
             'ui'                 : [
                     'activityKtx'     : "androidx.activity:activity-ktx:$versions.activityVersion",
@@ -86,6 +87,6 @@ ext {
             ],
             'livedataEventbus'   : "io.github.jeremyliao:live-event-bus-x:$versions.liveEventbus",
             'viewbindingdelegate': "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$versions.viewbindingdelegate",
-            'preference' : "androidx.preference:preference-ktx:$versions.preference"
+            'preference'         : "androidx.preference:preference-ktx:$versions.preference"
     ]
 }

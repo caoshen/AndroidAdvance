@@ -1,5 +1,6 @@
 package io.github.caoshen.androidadvance.kotlin.delegation
 
+import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -72,6 +73,8 @@ class StringDelegate(private var s: String = "Hello") {
 }
 
 class Owner {
+    var log by SmartDelegator()
+    var cat by SmartDelegator()
     var text: String by StringDelegate()
     var textReadWrite: String by StringReadWritePropertyDelegate()
 }
@@ -88,6 +91,31 @@ class StringReadWritePropertyDelegate(private var s: String = "Hello custom") :
     }
 }
 
+class SmartDelegator : PropertyDelegateProvider<Owner, StringDelegate> {
+    override fun provideDelegate(thisRef: Owner, property: KProperty<*>): StringDelegate {
+        return if (property.name.contains("log")) {
+            StringDelegate("log")
+        } else {
+            StringDelegate("cat")
+        }
+    }
+}
+
+var c = 3
+
+var cp = ::c
+
+fun printProperty() {
+    println(::c.get())
+    println(::c.name)
+    println(c.javaClass)
+    println(c.javaClass.kotlin)
+    println(c::class.java)
+    println(c::class)
+    println(cp::class)
+    println(::c::class)
+    println(::c::class.java)
+}
 
 fun main() {
 
@@ -115,4 +143,6 @@ fun main() {
     println(owner.textReadWrite)
 
     // provide delegate
+    println(owner.log)
+    println(owner.cat)
 }
