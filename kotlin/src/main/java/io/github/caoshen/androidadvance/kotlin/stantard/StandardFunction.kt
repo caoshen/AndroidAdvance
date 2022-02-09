@@ -1,7 +1,14 @@
-package io.github.caoshen.androidadvance.jetpack.stantard
+package io.github.caoshen.androidadvance.kotlin.stantard
 
 import java.lang.StringBuilder
 
+/**
+ * with 是一个普通的内联方法，非扩展方法。
+ *
+ * receiver 接收者
+ * block 接收者的一个扩展方法，空参数，返回值为 with 的返回值
+ * 返回 block 的值
+ */
 public inline fun <T, R> with(receiver: T, block: T.() -> R): R {
     // 返回第二个参数 lambda 的值
     println("standard function: with.")
@@ -9,6 +16,12 @@ public inline fun <T, R> with(receiver: T, block: T.() -> R): R {
     return receiver.block()
 }
 
+/**
+ * apply 是一个扩展方法
+ *
+ * block 被扩展的接收者的一个扩展方法，空参数，返回也为空
+ * 返回接收者自身
+ */
 public fun <T> T.apply(block: T.() -> Unit): T {
     println("standard function: apply.")
 
