@@ -45,6 +45,7 @@ android {
             version "3.6.0"
         }
     }
+    ndkVersion "22.1.7171670"
 }
 
 dependencies {
@@ -54,11 +55,11 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation "androidx.core:core-ktx:+"
+    implementation deps.core.coreKtx
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 }
 repositories {
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+//    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     mavenCentral()
 }

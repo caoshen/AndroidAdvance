@@ -28,7 +28,9 @@ ext {
             // view binding
             viewbindingdelegate    : '1.4.6',
             // preferences
-            preference             : '1.1.1'
+            preference             : '1.1.1',
+            // core ktx
+            coreKtx                : '1.7.0'
     ]
 
     deps = [
@@ -87,6 +89,9 @@ ext {
             ],
             'livedataEventbus'   : "io.github.jeremyliao:live-event-bus-x:$versions.liveEventbus",
             'viewbindingdelegate': "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$versions.viewbindingdelegate",
-            'preference'         : "androidx.preference:preference-ktx:$versions.preference"
+            'preference'         : "androidx.preference:preference-ktx:$versions.preference",
+            'core'               : [
+                    'coreKtx': "androidx.core:core-ktx:$versions.coreKtx"
+            ]
     ]
 }
