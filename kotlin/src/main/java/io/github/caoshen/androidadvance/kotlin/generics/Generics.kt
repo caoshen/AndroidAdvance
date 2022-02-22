@@ -1,6 +1,10 @@
 package io.github.caoshen.androidadvance.kotlin.generics
 
+import android.content.Context
+import android.content.Intent
 import java.lang.IllegalArgumentException
+import java.util.*
+import kotlin.collections.ArrayList
 
 val <T> List<T>.penultimate: T
     get() = this[size - 2]
@@ -33,11 +37,70 @@ fun printSumInt(c: Collection<Int>) {
     }
 }
 
+// Cannot check for instance of erased type: T
+// Make type parameter reified and function inline
+//fun <T> isA(value: Any) = value is T
+
+inline fun <reified T> isA(value: Any) = value is T
+
+fun printIsA() {
+    // true
+    println(isA<String>("abc"))
+    // false
+    println(isA<String>(123))
+}
+
+fun filterIsInstance() {
+    val items = listOf("one", 2, "three")
+    // [one, three]
+    println(items.filterIsInstance<String>())
+}
+
+fun afterReified() {
+    val items = listOf("one", 2, "three")
+    val destination = ArrayList<String>()
+
+    for (element in items) {
+        if (element is String) {
+            destination.add(element)
+        }
+    }
+
+    // [one, three]
+    println(destination)
+}
+
+fun reifiedClass() {
+    val serviceImpl = ServiceLoader.load(Service::class.java)
+    // reified
+    val serviceImpl2 = loadService<Service>()
+}
+
+inline fun <reified T> loadService() {
+    ServiceLoader.load(T::class.java)
+}
+
+fun startActivity2(context: Context) {
+    val intent = Intent(context, SampleActivity::class.java)
+    context.startActivity(intent)
+}
+
+inline fun <reified T> Context.startActivity() {
+    val intent = Intent(this, T::class.java)
+    startActivity(intent)
+}
+
 fun main() {
-    printSumInt(listOf(1, 2, 3))
+
+    afterReified()
+//    filterIsInstance()
+//    printIsA()
+//    printSumInt(listOf(1, 2, 3))
 //    printSum(listOf("a", "b", "c"))
 //    printSum(listOf(1, 2, 3))
 //    printSum(setOf(1, 2, 3))
+
+
 //    val strList: List<String>
 //    filter()
 
