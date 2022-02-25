@@ -6,6 +6,7 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
 import java.lang.Appendable
 import kotlin.concurrent.thread
+import kotlin.coroutines.coroutineContext
 
 //interface List<T> {
 //    operator fun get(index: Int): T
@@ -65,10 +66,13 @@ fun <T : Any> saveSomething(some : T) {
     set.add(some)
 }
 
-fun main() {
+suspend fun testContext() = coroutineContext
+
+fun main() = runBlocking {
+    println(testContext())
 //    val nullableProcessor = Processor<String?>()
 //    nullableProcessor.process(null)
-    saveSomething("null")
+//    saveSomething("null")
 }
 
 /**
