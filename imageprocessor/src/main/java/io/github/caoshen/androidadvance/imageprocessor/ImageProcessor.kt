@@ -25,38 +25,38 @@ fun loadImage(imageFile: File) =
 
 /**
  * 图片裁切
- * 待实现
  */
-fun Image.crop(startY: Int, startX: Int, width: Int, height: Int): Image = let {
-    Image(Array(height) { y ->
+fun Image.crop(startY: Int, startX: Int, width: Int, height: Int): Image {
+    val pixels = Array(height) { y ->
         Array(width) { x ->
-            Color(it.getPixel(startY + y, startX + x).rgb)
+            getPixel(startY + y, startX + x)
         }
-    })
+    }
+    return Image(pixels)
 }
 
 /**
  * 横向翻转图片
- * 待实现
  */
-fun Image.flipHorizontal(): Image = let {
-    Image(Array(it.height()) { y ->
-        Array(it.width()) { x ->
-            Color(it.getPixel(y, it.width() - 1 - x).rgb)
+fun Image.flipHorizontal(): Image {
+    val pixels = Array(height()) { y ->
+        Array(width()) { x ->
+            getPixel(y, width() - 1 - x)
         }
-    })
+    }
+    return Image(pixels)
 }
 
 /**
  * 纵向翻转图片
- * 待实现
  */
-fun Image.flipVertical(): Image = let {
-    Image(Array(it.height()) { y ->
-        Array(it.width()) { x ->
-            Color(it.getPixel(it.height() - 1 - y, x).rgb)
+fun Image.flipVertical(): Image {
+    val pixels = Array(height()) { y ->
+        Array(width()) { x ->
+            getPixel(height() - 1 - y, x)
         }
-    })
+    }
+    return Image(pixels)
 }
 
 /**
@@ -97,7 +97,7 @@ fun main() = runBlocking {
     imageFlipVertical.save("${BASE_PATH}android-flip-vertical.png")
 
     println("crop")
-    val imageCrop = image.crop(100, 100, image.width() / 2, image.height() / 2)
+    val imageCrop = image.crop(0, 0, image.width() / 2, image.height() / 2)
 
     println("save image start")
     imageCrop.save("${BASE_PATH}android-crop.png")
