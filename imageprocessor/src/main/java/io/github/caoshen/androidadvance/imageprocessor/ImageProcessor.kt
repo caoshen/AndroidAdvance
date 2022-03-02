@@ -1,10 +1,15 @@
 package io.github.caoshen.androidadvance.imageprocessor
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
+import okhttp3.*
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.File
+import java.lang.Exception
+import java.net.HttpURLConnection
+import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
+import kotlin.coroutines.CoroutineContext
 
 const val BASE_PATH = "./imageprocessor/src/main/resources/images/"
 
@@ -63,7 +68,46 @@ fun Image.flipVertical(): Image {
  * 挂起函数，以http的方式下载图片，保存到本地
  * 待实现
  */
-suspend fun downloadImage(url: String, outputFile: File): Boolean = TODO()
+suspend fun downloadImage(
+    coroutineContext: CoroutineContext = Dispatchers.IO,
+    url: String,
+    outputFile: File
+): Boolean {
+    return withContext(coroutineContext) {
+        try {
+            downloadSync(url, outputFile)
+        } catch (e: Exception) {
+            println(e)
+            return@withContext false
+        }
+        return@withContext true
+    }
+}
+
+fun downloadSync(url: String, outputFile: File) {
+    val request = Request.Builder()
+        .url(url)
+        .build()
+
+    val client = OkHttpClient.Builder()
+        .connectTimeout(10L, TimeUnit.SECONDS)
+        .readTimeout(10L, TimeUnit.SECONDS)
+        .build()
+
+    val response = client.newCall(request)
+        .execute()
+
+    val body = response.body
+    val code = response.code
+
+    if (code >= HttpURLConnection.HTTP_OK && code < HttpURLConnection.HTTP_MULT_CHOICE && body != null) {
+        body.byteStream().apply {
+            outputFile.outputStream().use { fileOut ->
+                copyTo(fileOut)
+            }
+        }
+    }
+}
 
 /**
  * 保存图片到本地
@@ -77,6 +121,23 @@ fun Image.save(path: String) {
         }
     }
     ImageIO.write(bufferedImage, "png", File(path))
+}
+
+fun Image.writeToFile(outputFile: File): Boolean = try {
+    val width = width()
+    val height = height()
+    val image = BufferedImage(width, height, BufferedImage.TYPE_INT_RGB).apply {
+        for (x in 0 until width)
+            for (y in 0 until height) {
+                val pixel = getPixel(y, x)
+                setRGB(x, y, pixel.rgb)
+            }
+    }
+    ImageIO.write(image, "png", outputFile)
+    true
+} catch (e: Exception) {
+    println(e)
+    false
 }
 
 fun main() = runBlocking {
@@ -101,4 +162,17 @@ fun main() = runBlocking {
 
     println("save image start")
     imageCrop.save("${BASE_PATH}android-crop.png")
+
+    // download image
+    println("start download png from network")
+    val url = "https://kotlinlang.org/assets/images/index/banners/kotlin-1.6.20-M1.png"
+    val path = "${BASE_PATH}downloaded.png"
+
+    downloadImage(url = url, outputFile = File(path))
+
+    loadImage(File(path))
+        .flipVertical()
+        .writeToFile(File("${BASE_PATH}download_flip_vertical.png"))
+
+    println("Done")
 }
