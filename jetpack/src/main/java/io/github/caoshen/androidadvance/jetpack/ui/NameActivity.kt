@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import io.github.caoshen.androidadvance.jetpack.databinding.ActivityNameBinding
+import io.github.caoshen.androidadvance.jetpack.viewmodel.MyViewModel
 import io.github.caoshen.androidadvance.jetpack.viewmodel.NameViewModel
 import io.github.caoshen.baselib.utils.startActivity
 
@@ -14,6 +15,8 @@ class NameActivity : AppCompatActivity() {
     }
 
     private val nameViewModel by viewModels<NameViewModel>()
+
+    private val myViewModel by viewModels<MyViewModel>()
 
     private lateinit var binding: ActivityNameBinding
 
@@ -51,6 +54,14 @@ class NameActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnPostValue.setOnClickListener {
+            myViewModel.updateTitlePost("Java")
+            myViewModel.updateTitlePost("Kotlin")
+        }
+
+        myViewModel.countLiveData.observe(this) {
+            Log.d(TAG, "livedata onChanged: value = $it")
+        }
     }
 
     override fun onResume() {

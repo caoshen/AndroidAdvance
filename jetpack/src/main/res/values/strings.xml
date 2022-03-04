@@ -32,4 +32,5 @@
     <string name="kotlin_coroutines">kotlin协程</string>
     <string name="workmanager">WorkManager</string>
     <string name="record_service">录音服务</string>
+    <string name="post_twice">连续 postValue 两次</string>
 </resources>
