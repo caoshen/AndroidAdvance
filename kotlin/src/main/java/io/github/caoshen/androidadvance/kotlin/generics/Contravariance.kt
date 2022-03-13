@@ -27,13 +27,6 @@ interface Function1<in P, out R> {
     operator fun invoke(p: P): R
 }
 
-open class Animal {
-
-}
-
-class Cat : Animal() {
-
-}
 
 // Cat 是参数，f 在 Cat 上是逆变的。Number 是返回值，f 在 Number 是协变的。
 fun enumerateCats(f: (Cat) -> Number) {
