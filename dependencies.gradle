@@ -30,7 +30,9 @@ ext {
             // preferences
             preference             : '1.1.1',
             // core ktx
-            coreKtx                : '1.7.0'
+            coreKtx                : '1.7.0',
+            // leak canary
+            leakcanary : '2.8.1'
     ]
 
     deps = [
@@ -92,6 +94,7 @@ ext {
             'preference'         : "androidx.preference:preference-ktx:$versions.preference",
             'core'               : [
                     'coreKtx': "androidx.core:core-ktx:$versions.coreKtx"
-            ]
+            ],
+            'leakcanary' : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
     ]
 }

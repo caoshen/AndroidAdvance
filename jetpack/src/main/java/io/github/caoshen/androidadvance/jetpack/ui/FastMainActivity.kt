@@ -16,6 +16,7 @@ import io.github.caoshen.androidadvance.jetpack.R
 import io.github.caoshen.androidadvance.jetpack.databinding.ActivityFastMainBinding
 import io.github.caoshen.androidadvance.jetpack.livedata.NetworkWatchLiveData
 import io.github.caoshen.androidadvance.jetpack.livedata.TimerGlobalLiveData
+import io.github.caoshen.androidadvance.jetpack.service.SimpleIntentService
 import io.github.caoshen.androidadvance.jetpack.workmanager.WorkManagerActivity
 import io.github.caoshen.baselib.base.BaseActivity
 import io.github.caoshen.baselib.utils.startActivity
@@ -38,6 +39,7 @@ class FastMainActivity : BaseActivity(R.layout.activity_fast_main) {
     override fun init() {
         initData()
         initGlobalObserver()
+        startService(Intent(this, SimpleIntentService::class.java))
     }
 
     private fun initGlobalObserver() {

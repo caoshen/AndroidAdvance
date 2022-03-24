@@ -97,4 +97,6 @@ dependencies {
     implementation deps.rx.rxandroid
 
     implementation project(':baselib')
+
+    debugImplementation deps.leakcanary
 }
