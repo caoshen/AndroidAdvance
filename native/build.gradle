@@ -21,6 +21,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11"
@@ -29,6 +33,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -58,6 +65,7 @@ dependencies {
     implementation deps.core.coreKtx
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+//    implementation 'com.github.bytedance:memory-leak-detector:0.1.8'
 }
 repositories {
 //    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
