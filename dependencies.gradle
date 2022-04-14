@@ -32,7 +32,9 @@ ext {
             // core ktx
             coreKtx                : '1.7.0',
             // leak canary
-            leakcanary : '2.8.1'
+            leakcanary             : '2.8.1',
+            // moshi
+            moshi                  : '1.13.0'
     ]
 
     deps = [
@@ -78,8 +80,11 @@ ext {
             'network'            : [
                     'retrofit'          : "com.squareup.retrofit2:retrofit:$versions.retrofit",
                     'converterGson'     : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+                    'converterMoshi'    : "com.squareup.retrofit2:converter-moshi:$versions.retrofit",
                     'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptor",
-                    'adapterRxjava'     : "com.squareup.retrofit2:adapter-rxjava3:$versions.adapterRxjava"
+                    'adapterRxjava'     : "com.squareup.retrofit2:adapter-rxjava3:$versions.adapterRxjava",
+                    'moshiKotlin'       : "com.squareup.moshi:moshi-kotlin:$versions.moshi",
+                    'moshiAdapter'      : "com.squareup.moshi:moshi-adapters:$versions.moshi"
             ],
             'fragment'           : [
                     'fragmentKtx': "androidx.fragment:fragment-ktx:$versions.fragmentKtx"
@@ -95,6 +100,6 @@ ext {
             'core'               : [
                     'coreKtx': "androidx.core:core-ktx:$versions.coreKtx"
             ],
-            'leakcanary' : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+            'leakcanary'         : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
     ]
 }

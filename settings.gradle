@@ -8,3 +8,4 @@ rootProject.name = "AndroidAdvance"
 include ':baselib'
 include ':kotlin'
 include ':imageprocessor'
+include ':githubtrending'
