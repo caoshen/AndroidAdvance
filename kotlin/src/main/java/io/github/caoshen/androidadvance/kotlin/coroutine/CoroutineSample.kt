@@ -155,12 +155,6 @@ Get 4
 
 //}
 
-suspend fun getUserInfo(): String {
-    withContext(Dispatchers.IO) {
-        delay(1000)
-    }
-    return "boyCoder"
-}
 
 
 
