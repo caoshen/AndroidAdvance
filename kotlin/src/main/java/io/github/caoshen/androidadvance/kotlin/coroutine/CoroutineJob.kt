@@ -26,25 +26,6 @@ fun coroutineJobJoin() = runBlocking {
     job.log()
 }
 
-fun Job.log() {
-    logX("""
-        isActive = $isActive
-        isCancelled = $isCancelled
-        isCompleted = $isCompleted
-    """)
-}
-
-fun logX(any: Any?) {
-    println(
-        """
-        ================================
-        $any
-        Thread:${Thread.currentThread().name}
-        ================================
-    """.trimIndent()
-    )
-}
-
 fun main() {
 //    coroutineJobJoin()
     val s = """
