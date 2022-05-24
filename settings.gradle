@@ -1,11 +1,12 @@
+rootProject.name = "AndroidAdvance"
 include ':native'
 include ':common'
 include ':rxjava'
 include ':jetpack'
 include ':javassist-gradle-plugin'
-include ':app'
-rootProject.name = "AndroidAdvance"
 include ':baselib'
+include ':app'
 include ':kotlin'
 include ':imageprocessor'
 include ':githubtrending'
+include ':matrix'
