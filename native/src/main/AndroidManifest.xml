@@ -3,8 +3,7 @@
     package="com.example.nativelib">
 
     <application
-        android:theme="@style/Theme.AppCompat"
-        android:debuggable="true">
+        android:theme="@style/Theme.AppCompat">
         <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
