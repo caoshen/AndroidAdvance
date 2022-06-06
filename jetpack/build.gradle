@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "31.0.0"
 
     defaultConfig {
         minSdkVersion 21
@@ -20,6 +20,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -42,6 +45,16 @@ android {
 
     buildFeatures {
         viewBinding true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
@@ -50,11 +63,18 @@ dependencies {
     implementation deps.workmanager.workRuntimeKtx
     implementation deps.workmanager.workRxjava2
     implementation deps.workmanager.workGcm
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    implementation 'androidx.activity:activity-compose:1.3.1'
     androidTestImplementation deps.workmanager.workTesting
 
     // Room components
     implementation deps.room.roomKtx
     implementation deps.room.roomRxjava2
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     kapt deps.room.roomCompiler
     androidTestImplementation deps.room.roomTesting
 

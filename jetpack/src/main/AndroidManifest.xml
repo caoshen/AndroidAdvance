@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.caoshen.androidadvance.jetpack">
+    package="io.github.caoshen.androidadvance.jetpack" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -14,23 +14,33 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
-        <activity android:name=".room.MainActivity"></activity>
-        <activity android:name=".room.NewWordActivity" />
-        <activity android:name=".retrofit.RetrofitMainActivity"></activity>
+        android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.FastMainActivity"
-            android:exported="true">
+            android:name=".compose.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".room.MainActivity" />
+        <activity android:name=".room.NewWordActivity" />
+        <activity android:name=".retrofit.RetrofitMainActivity" />
+        <activity
+            android:name=".ui.FastMainActivity"
+            android:exported="true" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".ui.SecondActivity" />
         <activity android:name=".ui.SavedStateActivity" />
         <activity android:name=".ui.ApiActivity" />
-        <activity android:name=".ui.NameActivity"></activity>
+        <activity android:name=".ui.NameActivity" />
         <activity android:name=".ui.AudioFocusActivity" />
         <activity android:name=".ui.DetailsActivity" />
         <activity android:name=".ui.CoroutinesActivity" />
@@ -39,4 +49,5 @@
 
         <service android:name=".service.SimpleIntentService" />
     </application>
+
 </manifest>
