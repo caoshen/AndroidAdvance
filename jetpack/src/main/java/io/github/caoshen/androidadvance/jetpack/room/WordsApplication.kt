@@ -1,6 +1,6 @@
 package io.github.caoshen.androidadvance.jetpack.room
 
-import android.app.Application
+import io.github.caoshen.androidadvance.jetpack.compose.util.AppHolder
 import io.github.caoshen.baselib.base.BaseApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -19,5 +19,11 @@ class WordsApplication : BaseApp() {
 
     val repository by lazy {
         WordRepository(database.wordDao())
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        AppHolder.appContext = this
     }
 }

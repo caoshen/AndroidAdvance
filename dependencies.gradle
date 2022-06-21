@@ -34,7 +34,9 @@ ext {
             // leak canary
             leakcanary             : '2.8.1',
             // moshi
-            moshi                  : '1.13.0'
+            moshi                  : '1.13.0',
+            // navigation
+            navigationCompose       :  '2.5.0-rc01'
     ]
 
     deps = [
@@ -100,6 +102,9 @@ ext {
             'core'               : [
                     'coreKtx': "androidx.core:core-ktx:$versions.coreKtx"
             ],
-            'leakcanary'         : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+            'leakcanary'         : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary",
+            'navigation': [
+                    'navigationCompose' : "androidx.navigation:navigation-compose:$versions.navigationCompose"
+            ]
     ]
 }

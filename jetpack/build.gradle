@@ -96,6 +96,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation deps.ui.material
 
+    // compose
+    implementation deps.navigation.navigationCompose
+
     // Testing
     testImplementation deps.testing.junit
     androidTestImplementation deps.testing.coreTesting
