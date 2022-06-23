@@ -11,7 +11,7 @@ class TakePhotoLiveData(
     private val key: String
 ) : LiveData<Bitmap>() {
 
-    private lateinit var mTakePhotoLauncher: ActivityResultLauncher<Void>
+    private lateinit var mTakePhotoLauncher: ActivityResultLauncher<Void?>
 
     override fun onActive() {
         super.onActive()

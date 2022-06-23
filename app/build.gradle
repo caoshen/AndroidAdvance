@@ -71,7 +71,7 @@ dependencies {
     implementation deps.kotlin.stdlibJdk7
     api deps.kotlin.coroutinesCore
     api deps.kotlin.coroutinesAndroid
-    implementation "androidx.core:core-ktx:+"
+    implementation deps.core.coreKtx
 
     // UI
     implementation 'androidx.appcompat:appcompat:1.2.0'

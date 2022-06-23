@@ -10,7 +10,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    buildToolsVersion "31.0.0"
 
     defaultConfig {
         minSdkVersion 19

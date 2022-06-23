@@ -5,7 +5,9 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import io.github.caoshen.androidadvance.jetpack.R
 import io.github.caoshen.androidadvance.jetpack.compose.ui.theme.splashBackground
 import io.github.caoshen.androidadvance.jetpack.compose.ui.theme.splashText
+import io.github.caoshen.androidadvance.jetpack.compose.util.AppHolder.SPLASH_DELAY
 import kotlinx.coroutines.delay
 
 val LOGO_HEIGHT = Dp(200F)
@@ -43,14 +46,14 @@ fun Splash(offsetState: Dp, alphaState: Float) {
                     .size(LOGO_HEIGHT)
                     .alpha(alpha = alphaState),
                 painter = painterResource(id = getLogo()),
-                contentDescription = stringResource(id = R.string.app_name)
+                contentDescription = stringResource(id = R.string.compose)
             )
             // 4 TextView
             Text(
                 modifier = Modifier
-                    .offset(offsetState)
-                    .alpha(alphaState),
-                text = stringResource(id = R.string.app_name),
+                    .offset(y = offsetState)
+                    .alpha(alpha = alphaState),
+                text = stringResource(id = R.string.compose),
                 color = MaterialTheme.colors.splashText,
                 style = MaterialTheme.typography.h5,
                 fontWeight = FontWeight.Bold,
@@ -60,6 +63,9 @@ fun Splash(offsetState: Dp, alphaState: Float) {
     }
 }
 
+/**
+ * 动画
+ */
 @Composable
 fun Splash(gotoHomeScreen: () -> Unit) {
     // 1 start 标记动画状态
@@ -67,6 +73,7 @@ fun Splash(gotoHomeScreen: () -> Unit) {
         mutableStateOf(false)
     }
     // 2 设置 offset 和 alpha
+    // 平移100dp到0dp
     val offset by animateDpAsState(
         targetValue = if (start) 0.dp else 100.dp,
         animationSpec = tween(
@@ -74,21 +81,28 @@ fun Splash(gotoHomeScreen: () -> Unit) {
         )
     )
 
+    // 透明度0到1
     val alpha by animateFloatAsState(targetValue = if (start) 1f else 0f,
     animationSpec = tween(
         durationMillis = 2000
     ))
 
+    // 启动协程
     LaunchedEffect(key1 = Unit) {
         start = true
-        delay(1000)
+        delay(SPLASH_DELAY)
         gotoHomeScreen()
     }
 
     Splash(offsetState = offset, alphaState = alpha)
 }
 
+@Composable
 fun getLogo(): Int {
-    return R.drawable.ic_launcher_foreground
+    return if (isSystemInDarkTheme()) {
+        R.drawable.to_do_logo
+    } else {
+        R.drawable.to_do_logo
+    }
 }
 

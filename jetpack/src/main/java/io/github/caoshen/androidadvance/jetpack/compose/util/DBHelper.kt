@@ -2,7 +2,7 @@ package io.github.caoshen.androidadvance.jetpack.compose.util
 
 import androidx.room.Room
 import io.github.caoshen.androidadvance.jetpack.compose.data.TodoDao
-import io.github.caoshen.androidadvance.jetpack.compose.data.entity.TodoDatabase
+import io.github.caoshen.androidadvance.jetpack.compose.data.TodoDatabase
 
 object DBHelper {
 

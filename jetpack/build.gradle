@@ -40,7 +40,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = ['-Xjvm-default=all-compatibility']
     }
 
     buildFeatures {
@@ -87,7 +88,7 @@ dependencies {
     implementation deps.kotlin.stdlibJdk7
     api deps.kotlin.coroutinesCore
     api deps.kotlin.coroutinesAndroid
-    implementation "androidx.core:core-ktx:+"
+    implementation deps.core.coreKtx
 
     // UI
     implementation 'androidx.appcompat:appcompat:1.2.0'
