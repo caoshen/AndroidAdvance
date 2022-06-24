@@ -86,3 +86,28 @@ val Colors.splashBackground: Color
     } else {
         Color.Black
     }
+
+val Colors.fabBackground: Color
+    @Composable
+    get() = if (isLight) {
+        Ocean6
+    } else {
+        Lavender5
+    }
+
+
+val Colors.topAppBarContent: Color
+    @Composable
+    get() = if (isLight) {
+        Color.White
+    } else {
+        Neutral0
+    }
+
+val Colors.topAppBarBackground: Color
+    @Composable
+    get() = if (isLight) {
+        Lavender5
+    } else {
+        Color.Black
+    }

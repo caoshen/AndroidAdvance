@@ -36,4 +36,7 @@
     <string name="title_activity_main">MainActivity</string>
 
     <string name="compose">Compose</string>
+    <string name="add_button">添加</string>
+    <string name="delete_all_action">删除</string>
+    <string name="list_screen_title">任务列表</string>
 </resources>

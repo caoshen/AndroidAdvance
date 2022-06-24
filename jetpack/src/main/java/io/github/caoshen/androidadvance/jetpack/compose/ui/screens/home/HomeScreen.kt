@@ -1,10 +1,9 @@
 package io.github.caoshen.androidadvance.jetpack.compose.ui.screens.home
 
-import android.view.View
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.platform.LocalContext
 import io.github.caoshen.androidadvance.jetpack.compose.ui.viewmodels.HomeViewModel
 
 @Composable
@@ -14,11 +13,16 @@ fun HomeScreen(
 ) {
     val allTasks = viewModel.allTasks.collectAsState()
     val scaffoldState = rememberScaffoldState()
+    val context = LocalContext.current
 
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            HomeAppBar()
+            HomeAppBar(
+                onDeleteAllConfirmed = {
+                    viewModel.deleteAllTasks()
+                }
+            )
         },
 
         content = {
@@ -26,15 +30,9 @@ fun HomeScreen(
         },
 
         floatingActionButton = {
-            HomeFab()
+            HomeFab(onFabClicked = gotoTaskDetail)
         }
-
     )
-}
-
-@Composable
-fun HomeAppBar() {
-
 }
 
 @Composable
@@ -42,7 +40,3 @@ fun HomeContent() {
 
 }
 
-@Composable
-fun HomeFab() {
-
-}
