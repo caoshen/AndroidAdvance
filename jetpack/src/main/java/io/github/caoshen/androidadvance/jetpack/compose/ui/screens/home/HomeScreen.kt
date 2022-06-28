@@ -4,7 +4,9 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
+import io.github.caoshen.androidadvance.jetpack.R
 import io.github.caoshen.androidadvance.jetpack.compose.ui.viewmodels.HomeViewModel
+import io.github.caoshen.androidadvance.jetpack.compose.util.showToast
 
 @Composable
 fun HomeScreen(
@@ -21,6 +23,7 @@ fun HomeScreen(
             HomeAppBar(
                 onDeleteAllConfirmed = {
                     viewModel.deleteAllTasks()
+                    showToast(context, context.getString(R.string.all_tasks_deleted))
                 }
             )
         },

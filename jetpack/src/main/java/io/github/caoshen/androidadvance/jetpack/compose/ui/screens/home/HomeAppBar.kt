@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import io.github.caoshen.androidadvance.jetpack.R
+import io.github.caoshen.androidadvance.jetpack.compose.dialog.TodoAlertDialog
 import io.github.caoshen.androidadvance.jetpack.compose.ui.theme.MEDIUM_PADDING
 import io.github.caoshen.androidadvance.jetpack.compose.ui.theme.topAppBarBackground
 import io.github.caoshen.androidadvance.jetpack.compose.ui.theme.topAppBarContent
@@ -47,11 +48,26 @@ fun HomeTopAppBar(
 fun HomeAppBarActions(
     onDeleteAllConfirmed: () -> Unit
 ) {
-    var isShowingDialog by remember {
+    var isShowDialog by remember {
         mutableStateOf(false)
     }
 
-    DeleteAllAction(onDeleteAllConfirmed)
+    TodoAlertDialog(
+        title = stringResource(id = R.string.delete_all_tasks),
+        msg = stringResource(id = R.string.delete_all_tasks_confirmation),
+        isShowDialog = isShowDialog,
+        onNoClicked = {
+            isShowDialog = false
+        },
+        onYesClicked = {
+            onDeleteAllConfirmed()
+        }
+    )
+
+    DeleteAllAction(
+        onDeleteAllConfirmed = {
+            isShowDialog = true
+        })
 }
 
 @Composable

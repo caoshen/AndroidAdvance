@@ -39,4 +39,9 @@
     <string name="add_button">添加</string>
     <string name="delete_all_action">删除</string>
     <string name="list_screen_title">任务列表</string>
+    <string name="all_tasks_deleted">所有任务都已清空</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
+    <string name="delete_all_tasks">删除所有任务</string>
+    <string name="delete_all_tasks_confirmation">你确定要删除所有任务吗？删除后无法恢复！</string>
 </resources>
