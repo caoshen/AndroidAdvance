@@ -116,6 +116,8 @@ dependencies {
     implementation deps.network.adapterRxjava
     implementation deps.fragment.fragmentKtx
 
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
+
     // rxjava
     implementation deps.rx.rxjava
     implementation deps.rx.rxandroid
@@ -123,4 +125,30 @@ dependencies {
     implementation project(':baselib')
 
     debugImplementation deps.leakcanary
+}
+
+task changeVersion(dependsOn: ':jetpack:assembleRelease') {
+    doFirst {
+        def statusPro = "git symbolic-ref --short -q HEAD".execute()
+        println "git symbolic-ref --short -q HEAD:\n" + statusPro.inputStream.text
+        def name = "${android.defaultConfig.versionName}-$statusPro"
+        android.defaultConfig.versionName name
+    }
+}
+
+
+// Map for the version code that gives each ABI a value.
+ext.abiCodes = ['armeabi-v7a':1, mips:2, x86:3]
+
+
+android.applicationVariants.all { variant ->
+    variant.outputs.each { output ->
+        def branch =
+                // Determines the ABI for this variant and returns the mapped value.
+                "git symbolic-ref --short -q HEAD".execute().inputStream.text.trim()
+        if (branch != null) {
+            output.versionNameOverride =
+                    "${variant.versionName}-br-${branch}"
+        }
+    }
 }

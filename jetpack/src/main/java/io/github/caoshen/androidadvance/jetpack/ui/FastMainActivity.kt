@@ -1,13 +1,7 @@
 package io.github.caoshen.androidadvance.jetpack.ui
 
 import android.app.Activity
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
-import android.os.IBinder
-import android.os.Message
-import android.os.Messenger
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,7 +10,7 @@ import io.github.caoshen.androidadvance.jetpack.R
 import io.github.caoshen.androidadvance.jetpack.databinding.ActivityFastMainBinding
 import io.github.caoshen.androidadvance.jetpack.livedata.NetworkWatchLiveData
 import io.github.caoshen.androidadvance.jetpack.livedata.TimerGlobalLiveData
-import io.github.caoshen.androidadvance.jetpack.service.SimpleIntentService
+import io.github.caoshen.androidadvance.jetpack.service.SimpleService
 import io.github.caoshen.androidadvance.jetpack.workmanager.WorkManagerActivity
 import io.github.caoshen.baselib.base.BaseActivity
 import io.github.caoshen.baselib.utils.startActivity
@@ -39,7 +33,7 @@ class FastMainActivity : BaseActivity(R.layout.activity_fast_main) {
     override fun init() {
         initData()
         initGlobalObserver()
-        startService(Intent(this, SimpleIntentService::class.java))
+        startService(Intent(this, SimpleService::class.java))
     }
 
     private fun initGlobalObserver() {

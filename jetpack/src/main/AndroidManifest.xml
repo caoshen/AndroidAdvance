@@ -48,7 +48,9 @@
         <activity android:name=".workmanager.WorkManagerActivity" />
         <activity android:name=".ui.RecordActivity" />
 
-        <service android:name=".service.SimpleIntentService" />
+        <service android:name=".service.SimpleService"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>
