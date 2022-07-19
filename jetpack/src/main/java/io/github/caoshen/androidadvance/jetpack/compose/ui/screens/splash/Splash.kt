@@ -1,24 +1,24 @@
 package io.github.caoshen.androidadvance.jetpack.compose.ui.screens.splash
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import io.github.caoshen.androidadvance.jetpack.R
 import io.github.caoshen.androidadvance.jetpack.compose.ui.theme.splashBackground
 import io.github.caoshen.androidadvance.jetpack.compose.ui.theme.splashText
@@ -50,9 +50,6 @@ fun Splash(offsetState: Dp, alphaState: Float) {
             )
             // 4 TextView
             Text(
-                modifier = Modifier
-                    .offset(y = offsetState)
-                    .alpha(alpha = alphaState),
                 text = stringResource(id = R.string.compose),
                 color = MaterialTheme.colors.splashText,
                 style = MaterialTheme.typography.h5,
@@ -82,10 +79,12 @@ fun Splash(gotoHomeScreen: () -> Unit) {
     )
 
     // 透明度0到1
-    val alpha by animateFloatAsState(targetValue = if (start) 1f else 0f,
-    animationSpec = tween(
-        durationMillis = 2000
-    ))
+    val alpha by animateFloatAsState(
+        targetValue = if (start) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 2000
+        )
+    )
 
     // 启动协程
     LaunchedEffect(key1 = Unit) {
@@ -105,4 +104,81 @@ fun getLogo(): Int {
         R.drawable.to_do_logo
     }
 }
+
+enum class Tabs(
+    val title: String, @DrawableRes val icon: Int
+) {
+    ONE("One", R.drawable.ic_nav_news_normal),
+    TWO("Two", R.drawable.ic_nav_tweet_normal),
+    THREE("Three", R.drawable.ic_nav_discover_normal),
+    FOUR("Fore", R.drawable.ic_nav_my_normal)
+}
+
+@Composable
+fun One() {
+    BaseDefault("One")
+}
+
+@Composable
+fun Two() {
+    BaseDefault("Two")
+}
+
+@Composable
+fun Three() {
+    BaseDefault("Three")
+}
+
+@Composable
+fun Four() {
+    BaseDefault("Four")
+}
+
+@Composable
+fun BaseDefault(content: String) {
+    Row(
+        modifier = Modifier.fillMaxSize(),
+        horizontalArrangement =
+        Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+    ) { Text(content, fontSize = 50.sp) }
+}
+
+@ExperimentalFoundationApi
+@Preview(showBackground = true)
+@Composable
+fun Preview() {
+    // Tab数据
+    val tabs = Tabs.values()
+    // 使用remember记住State值
+    var position by remember { mutableStateOf(Tabs.ONE) }
+    // 脚手架，方便实现页面
+    Scaffold(
+        backgroundColor = Color.Yellow,
+        // 定义bottomBar
+        bottomBar = {
+            BottomNavigation {
+                tabs.forEach { tab ->
+                    BottomNavigationItem(
+                        modifier = Modifier.background(MaterialTheme.colors.primary),
+                        icon = { Icon(painterResource(tab.icon), contentDescription = null) },
+                        label = { Text(tab.title) },
+                        selected = tab == position,
+                        onClick = { position = tab },
+                        alwaysShowLabel = false,
+                    )
+                }
+            }
+        }) {
+        // 根据State值的变化来动态切换当前显示的页面
+        when (position) {
+            Tabs.ONE -> One()
+            Tabs.TWO -> Two()
+            Tabs.THREE -> Three()
+            Tabs.FOUR -> Four()
+        }
+    }
+}
+
+
 

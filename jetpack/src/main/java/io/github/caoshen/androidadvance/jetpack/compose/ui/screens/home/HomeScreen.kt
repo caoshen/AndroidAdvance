@@ -29,7 +29,6 @@ fun HomeScreen(
         },
 
         content = {
-            HomeContent()
         },
 
         floatingActionButton = {
@@ -37,9 +36,3 @@ fun HomeScreen(
         }
     )
 }
-
-@Composable
-fun HomeContent() {
-
-}
-
