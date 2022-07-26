@@ -54,7 +54,6 @@ class RecordActivity : BaseActivity(R.layout.activity_record) {
         mClientMessenger = Messenger(mClientHandler)
 
         val intent = Intent()
-        intent.setClassName("com.miui.voicetrigger", "com.miui.voicetrigger.VoiceAuthService")
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE)
     }
 
