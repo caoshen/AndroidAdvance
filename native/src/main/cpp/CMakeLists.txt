@@ -3,10 +3,11 @@ cmake_minimum_required(VERSION 3.4.1)
 project("native")
 
 add_library(native-lib SHARED native-lib.cpp)
+add_library(native-catcher SHARED native-catcher.cpp)
 
 find_library(log-lib log)
 
-target_link_libraries(native-lib ${log-lib})
+target_link_libraries(native-catcher native-lib ${log-lib})
 
 # gradlew :native:externalNativeBuildDebug
 # debug|armeabi-v7a :hello
