@@ -22,10 +22,10 @@
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Compose" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".room.MainActivity" />
         <activity android:name=".room.NewWordActivity" />
@@ -33,10 +33,10 @@
         <activity
             android:name=".ui.FastMainActivity"
             android:exported="true" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.SecondActivity" />
         <activity android:name=".ui.SavedStateActivity" />
