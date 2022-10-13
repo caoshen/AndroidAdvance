@@ -12,9 +12,13 @@ fun main() {
 //    flowOfFun()
 //    flow2list()
 //    onStartFun()
-//    onStartFun2()
+    onStartFun2()
 //    onCompleteFun()
-    cancelOnCompleteFun()
+//    cancelOnCompleteFun()
+//    flowFirst()
+//    flowSingle()
+//    flowFold()
+//    flowReduce()
 }
 
 fun flowEmit() = runBlocking {
@@ -36,6 +40,81 @@ fun flowEmit() = runBlocking {
             // 6 8
             println(it)
         }
+}
+
+fun flowFirst() = runBlocking {
+    val first = flow {
+        emit(1)
+        emit(2)
+        emit(3)
+        emit(4)
+        emit(5)
+    }
+        .filter {
+            it > 2
+        }
+        .map {
+            it * 2
+        }
+        .take(2)
+        .first()
+    // 6
+    println(first)
+}
+
+fun flowSingle() = runBlocking {
+    val single = flow {
+        emit(3)
+    }
+        .filter {
+            it > 2
+        }
+        .map {
+            it * 2
+        }
+        .take(2)
+        .single()
+    // 6
+    println(single)
+}
+
+fun flowFold() = runBlocking {
+    val fold = flow {
+        emit(1)
+        emit(2)
+        emit(3)
+        emit(4)
+        emit(5)
+    }.filter {
+        it > 2
+    }.map {
+        it * 2
+    }.take(2)
+        .fold(0) { acc, value ->
+            acc + value
+        }
+
+    // 14
+    println(fold)
+}
+
+fun flowReduce() = runBlocking {
+    val reduce = flow {
+        emit(1)
+        emit(2)
+        emit(3)
+        emit(4)
+        emit(5)
+    }.filter {
+        it > 2
+    }.map {
+        it * 2
+    }.take(2)
+        .reduce { acc, value ->
+            acc + value
+        }
+    // 14
+    println(reduce)
 }
 
 fun flowOfFun() = runBlocking {
@@ -171,4 +250,53 @@ fun cancelOnCompleteFun() = runBlocking {
             throw IllegalStateException()
         }
 
+}
+
+fun flowCatch() = runBlocking {
+    val flow = flow {
+        emit(1)
+        emit(2)
+        throw IllegalStateException()
+        emit(3)
+    }
+    flow.map {
+        it * 2
+    }.catch {
+        println("catch: $it")
+    }.collect {
+        println(it)
+    }
+}
+
+fun flowCatchDownStream() = runBlocking {
+    val flow = flow {
+        emit(1)
+        emit(2)
+        emit(3)
+    }
+
+    flow.map {
+        it * 2
+    }.catch {
+        println("catch: $it")
+    }.filter {
+        it / 0 > 1
+    }.collect {
+        println(it)
+    }
+}
+
+fun flowTryCatch() = runBlocking {
+    flowOf(4, 5, 6)
+        .onCompletion {
+            println("onCompletion second: $it")
+        }
+        .collect {
+            try {
+                println("collect: $it")
+                throw IllegalStateException()
+            } catch (e: Exception) {
+                println("cache $e")
+            }
+        }
 }
