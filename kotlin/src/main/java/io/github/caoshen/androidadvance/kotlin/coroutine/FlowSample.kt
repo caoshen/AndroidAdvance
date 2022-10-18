@@ -1,10 +1,7 @@
 package io.github.caoshen.androidadvance.kotlin.coroutine
 
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.lang.IllegalStateException
 
 fun main() {
@@ -12,13 +9,17 @@ fun main() {
 //    flowOfFun()
 //    flow2list()
 //    onStartFun()
-    onStartFun2()
+//    onStartFun2()
 //    onCompleteFun()
 //    cancelOnCompleteFun()
 //    flowFirst()
 //    flowSingle()
 //    flowFold()
 //    flowReduce()
+//    flowCatch()
+//    flowCatchDownStream()
+//    flowTryCatch()
+    flowOn()
 }
 
 fun flowEmit() = runBlocking {
@@ -266,6 +267,9 @@ fun flowCatch() = runBlocking {
     }.collect {
         println(it)
     }
+    //    2
+    //    4
+    //    catch: java.lang.IllegalStateException
 }
 
 fun flowCatchDownStream() = runBlocking {
@@ -284,6 +288,7 @@ fun flowCatchDownStream() = runBlocking {
     }.collect {
         println(it)
     }
+    // Exception in thread "main" java.lang.ArithmeticException: / by zero
 }
 
 fun flowTryCatch() = runBlocking {
@@ -296,7 +301,67 @@ fun flowTryCatch() = runBlocking {
                 println("collect: $it")
                 throw IllegalStateException()
             } catch (e: Exception) {
-                println("cache $e")
+                println("catch $e")
             }
         }
+//    collect: 4
+//    catch java.lang.IllegalStateException
+//            collect: 5
+//    catch java.lang.IllegalStateException
+//            collect: 6
+//    catch java.lang.IllegalStateException
+//            onCompletion second: null
+}
+
+fun flowOn() = runBlocking {
+    val flow = flow {
+        logX("Start")
+        emit(1)
+        logX("Emit: 1")
+        emit(2)
+        logX("Emit: 2")
+        emit(3)
+        logX("Emit: 3")
+    }
+
+    flow.filter {
+        logX("Filter: $it")
+        it > 2
+    }
+        .flowOn(Dispatchers.IO)
+        .collect {
+            logX("Collect: $it")
+        }
+//    ================================
+//    Start
+//    Thread:DefaultDispatcher-worker-1, time:1666096501866
+//    ================================
+//    ================================
+//    Filter: 1
+//    Thread:DefaultDispatcher-worker-1, time:1666096501917
+//    ================================
+//    ================================
+//    Emit: 1
+//    Thread:DefaultDispatcher-worker-1, time:1666096501917
+//    ================================
+//    ================================
+//    Filter: 2
+//    Thread:DefaultDispatcher-worker-1, time:1666096501917
+//    ================================
+//    ================================
+//    Emit: 2
+//    Thread:DefaultDispatcher-worker-1, time:1666096501917
+//    ================================
+//    ================================
+//    Filter: 3
+//    Thread:DefaultDispatcher-worker-1, time:1666096501917
+//    ================================
+//    ================================
+//    Emit: 3
+//    Thread:DefaultDispatcher-worker-1, time:1666096501917
+//    ================================
+//    ================================
+//    Collect: 3
+//    Thread:main, time:1666096501917
+//    ================================
 }
