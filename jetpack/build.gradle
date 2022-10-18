@@ -123,6 +123,7 @@ dependencies {
     implementation deps.rx.rxandroid
 
     implementation project(':baselib')
+    implementation project(':performance')
 
     debugImplementation deps.leakcanary
 }
