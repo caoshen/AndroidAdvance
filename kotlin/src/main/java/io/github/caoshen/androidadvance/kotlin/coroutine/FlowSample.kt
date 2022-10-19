@@ -1,6 +1,7 @@
 package io.github.caoshen.androidadvance.kotlin.coroutine
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.*
 import java.lang.IllegalStateException
 
@@ -19,7 +20,12 @@ fun main() {
 //    flowCatch()
 //    flowCatchDownStream()
 //    flowTryCatch()
-    flowOn()
+//    flowOn()
+//    flowOnIO()
+//    flowWithContext()
+//    flowWithContextAll()
+//    flowLaunchIn()
+    flowCold()
 }
 
 fun flowEmit() = runBlocking {
@@ -364,4 +370,167 @@ fun flowOn() = runBlocking {
 //    Collect: 3
 //    Thread:main, time:1666096501917
 //    ================================
+}
+
+fun flowOnIO() = runBlocking {
+    val flow = flow {
+        logX("Start")
+        emit(1)
+        logX("Emit: 1")
+    }
+
+    flow.flowOn(Dispatchers.IO)
+        .filter {
+            logX("Filter: $it")
+            it > 0
+        }
+        .collect {
+            logX("Collect: $it")
+        }
+
+//    ================================
+//    Start
+//    Thread:DefaultDispatcher-worker-1, time:1666165816908
+//    ================================
+//    ================================
+//    Emit: 1
+//    Thread:DefaultDispatcher-worker-1, time:1666165816942
+//    ================================
+//    ================================
+//    Filter: 1
+//    Thread:main, time:1666165816944
+//    ================================
+//    ================================
+//    Collect: 1
+//    Thread:main, time:1666165816944
+//    ================================
+}
+
+fun flowWithContext() = runBlocking {
+    val flow = flow {
+        logX("Start")
+        emit(1)
+        logX("Emit: 1")
+    }
+
+    flow.filter {
+        logX("Filter: $it")
+        it > 0
+    }
+        .collect {
+            // 不建议
+            withContext(Dispatchers.IO) {
+                logX("Collect: $it")
+            }
+        }
+
+//    ================================
+//    Start
+//    Thread:main, time:1666167319244
+//    ================================
+//    ================================
+//    Filter: 1
+//    Thread:main, time:1666167319297
+//    ================================
+//    ================================
+//    Collect: 1
+//    Thread:DefaultDispatcher-worker-2, time:1666167319311
+//    ================================
+//    ================================
+//    Emit: 1
+//    Thread:main, time:1666167319312
+//    ================================
+}
+
+fun flowWithContextAll() = runBlocking {
+    val flow = flow {
+        logX("Start")
+        emit(1)
+        logX("Emit: 1")
+    }
+
+    // 不建议
+    withContext(Dispatchers.IO) {
+        flow.filter {
+            logX("Filter: $it")
+            it > 0
+        }.collect {
+            logX("Collect: $it")
+        }
+    }
+//    ================================
+//    Start
+//    Thread:DefaultDispatcher-worker-1, time:1666167769589
+//    ================================
+//    ================================
+//    Filter: 1
+//    Thread:DefaultDispatcher-worker-1, time:1666167769645
+//    ================================
+//    ================================
+//    Collect: 1
+//    Thread:DefaultDispatcher-worker-1, time:1666167769645
+//    ================================
+//    ================================
+//    Emit: 1
+//    Thread:DefaultDispatcher-worker-1, time:1666167769645
+//    ================================
+}
+
+fun flowLaunchIn() = runBlocking {
+    val flow = flow {
+        logX("Start")
+        emit(1)
+        logX("Emit: 1")
+    }
+
+    val scope = CoroutineScope(mySingleDispatcher)
+
+    flow.flowOn(Dispatchers.IO)
+        .filter {
+            logX("Filter: $it")
+            it > 0
+        }.onEach {
+            logX("Collect: $it")
+        }.launchIn(scope)
+
+    delay(100L)
+
+//    ================================
+//    Start
+//    Thread:DefaultDispatcher-worker-1, time:1666168824669
+//    ================================
+//    ================================
+//    Emit: 1
+//    Thread:DefaultDispatcher-worker-1, time:1666168824704
+//    ================================
+//    ================================
+//    Filter: 1
+//    Thread:mySingleThread, time:1666168824706
+//    ================================
+//    ================================
+//    Collect: 1
+//    Thread:mySingleThread, time:1666168824706
+//    ================================
+}
+
+fun flowCold() = runBlocking {
+    val flow = flow {
+        (1..3).forEach {
+            println("Before send $it")
+            emit(it)
+            println("Send $it")
+        }
+    }
+
+    val channel = produce<Int>(capacity = 0) {
+        (1..3).forEach {
+            println("Before send $it")
+            send(it)
+            println("Send $it")
+        }
+    }
+
+    println("end")
+//    end
+//    Before send 1
 }
