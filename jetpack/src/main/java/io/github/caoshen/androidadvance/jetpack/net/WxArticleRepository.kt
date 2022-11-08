@@ -1,16 +1,33 @@
 package io.github.caoshen.androidadvance.jetpack.net
 
+import android.util.Log
 import io.github.caoshen.androidadvance.jetpack.bean.User
 import io.github.caoshen.androidadvance.jetpack.bean.WxArticleBean
 import io.github.caoshen.baselib.network.base.BaseRepository
 import io.github.caoshen.baselib.network.entity.ApiResponse
 import io.github.caoshen.baselib.network.entity.ApiSuccessResponse
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 
 class WxArticleRepository : BaseRepository() {
+    companion object {
+        private const val TAG = "WxArticleRepository"
+    }
+
     private val mService by lazy {
         RetrofitClient.service
+    }
+
+    suspend fun fetchWxArticleByFlow() {
+        fetch("${ApiService.BASE_URL}/wxarticle/chapters/json")
+            .catch {
+                Log.d(TAG, "There ware a problem:$it")
+            }
+            .collect {
+                Log.d(TAG, "response:$it")
+            }
     }
 
     suspend fun fetchWxArticleFromNet(): ApiResponse<List<WxArticleBean>> {

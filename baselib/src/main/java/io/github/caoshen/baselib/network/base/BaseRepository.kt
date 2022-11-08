@@ -4,7 +4,12 @@ import android.util.Log
 import io.github.caoshen.baselib.BuildConfig
 import io.github.caoshen.baselib.network.entity.*
 import io.github.caoshen.baselib.network.entity.handlingExceptions
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.callbackFlow
+import okhttp3.*
+import java.io.IOException
 
 /**
  * 两种方式封装Retrofit+协程，实现优雅快速的网络请求
@@ -49,5 +54,32 @@ open class BaseRepository {
         } else {
             ApiSuccessResponse(data)
         }
+    }
+
+    /**
+     * OkHTTP with Kotlin Flows and Coroutines
+     * https://mmmnnnmmm.com/okhttp-kotlin-flow-coroutine.html
+     */
+    fun fetch(
+        url: String,
+        okHttpClient: OkHttpClient = BaseOkHttpClient.get(),
+        request: Request.Builder = Request.Builder()
+    ) = callbackFlow<Response> {
+        val req = request.url(url)
+            .build()
+        okHttpClient.newCall(req)
+            .enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                    cancel("okhttp error", e)
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    if (response.isSuccessful) {
+                        trySendBlocking(response)
+                    } else {
+                        cancel("bad http code")
+                    }
+                }
+            })
     }
 }
