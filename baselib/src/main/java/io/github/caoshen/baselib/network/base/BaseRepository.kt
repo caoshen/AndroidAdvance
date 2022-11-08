@@ -6,6 +6,10 @@ import io.github.caoshen.baselib.network.entity.*
 import io.github.caoshen.baselib.network.entity.handlingExceptions
 import kotlinx.coroutines.delay
 
+/**
+ * 两种方式封装Retrofit+协程，实现优雅快速的网络请求
+ * https://juejin.cn/post/6993294489125126151
+ */
 open class BaseRepository {
 
     suspend fun <T> executeHttp(block: suspend () -> ApiResponse<T>): ApiResponse<T> {
