@@ -7,5 +7,6 @@
 
 #include <android/log.h>
 
-#define LOGGER(fmt, ...) __android_log_print(ANDROID_LOG_ERROR, "RAPHAEL", fmt, ##__VA_ARGS__)
+#define TAG "Native-logger"
+#define LOGGER(fmt, ...) __android_log_print(ANDROID_LOG_ERROR, TAG, fmt, ##__VA_ARGS__)
 #endif //ANDROIDADVANCE_LOGGER_H

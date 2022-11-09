@@ -14,6 +14,6 @@ sigjmp_buf JUMP_ANCHOR;
 volatile sig_atomic_t err_cnt = 0;
 
 void signal() {
-    struct sigaction sa;
-    sa.sa_handler
+//    struct sigaction sa;
+//    sa.sa_handler
 }
