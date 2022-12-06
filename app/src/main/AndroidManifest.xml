@@ -20,6 +20,26 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.AActivity"
+            android:exported="false">
+<!--            一个 Activity 可以有多个 IntentFilter。隐式启动 Activity 时，只要有一个 IntentFilter 匹配，那么 Activity 就能被启动。-->
+            <intent-filter>
+<!--                一个 IntentFilter 里面可以配置多个 action，多个 category，多个 data。-->
+
+<!--                如果启动的 intent 的 action 和 intentFilter 中的一个 action 相同，那么就算 action 匹配成功。如果 intent 的 action 没有和 intentFilter 中的任何一个 action 相同，那么匹配失败。如果 intent 没有 action，也会匹配失败。-->
+                <action android:name="android.intent.action.AACTIVITY.FIRST"/>
+                <action android:name="android.intent.action.AACTIVITY.SECOND"/>
+<!--                如果启动的 intent 有多个 category，那么每个 category 都在 intentFilter 的 category 列表中，才算 category 匹配成功。如果 intent 不设置 category，那么不会去匹配 intentFilter 的 category。-->
+                <category android:name="android.intent.category.AACTIVITY.FIRST"/>
+                <category android:name="android.intent.category.AACTIVITY.SECOND"/>
+<!--                如果启动的 intent 有 data，那么只要 data 在 intentFilter 的 data 列表中，就算 data 匹配成功。data 的匹配过程和 action 类似。如果 intentFilter 定义了 data，但是启动的 intent 没有 data，那么也会匹配失败。-->
+                <data android:name="android.intent.data.AACTIVITY.FIRST"/>
+                <data android:name="android.intent.data.AACTIVITY.SECOND"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.AACTIVITY.THIRD"/>
+            </intent-filter>
+        </activity>
 
         <provider
             android:name=".provider.DeviceProvider"
