@@ -57,6 +57,7 @@ android {
                             .collect { "**/" + it + "/wrap.sh" }
                     excludes += exclude_abis
                 }
+                exclude '**/libbytehook.so'
             }
 
             if (useASAN) {
@@ -100,6 +101,11 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
+
+    // https://google.github.io/prefab/
+    buildFeatures {
+        prefab true
+    }
 }
 
 dependencies {
@@ -113,6 +119,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 //    implementation 'com.github.bytedance:memory-leak-detector:0.1.8'
+
+    implementation 'com.bytedance:bytehook:1.0.7'
 }
 repositories {
 //    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
