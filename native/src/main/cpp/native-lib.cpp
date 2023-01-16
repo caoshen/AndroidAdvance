@@ -2,7 +2,7 @@
 #include <string>
 #include "Logger.h"
 
-extern "C" JNIEXPORT jstring JNICALL
+extern "C" JNIEXPORT jstring
 Java_com_example_nativelib_MainActivity_stringFromJNI(JNIEnv *env, jobject) {
     std::string hello = "Hello from Native-lib.cpp";
     char *ptr3 = NULL;
@@ -22,4 +22,29 @@ Java_com_example_nativelib_MainActivity_getStr(JNIEnv *env, jobject thiz) {
     // 越界
     ptr[4] = 6;
     return env->NewStringUTF(hello.c_str());
+}
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_example_nativelib_NativeHacker_nativeHook(JNIEnv *env, jclass clazz, jint type) {
+    // TODO: implement nativeHook()
+    return 0;
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_nativelib_NativeHacker_nativeUnhook(JNIEnv
+* env,
+jclass clazz
+) {
+// TODO: implement nativeUnhook()
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_nativelib_NativeHacker_nativeDumpRecords(JNIEnv
+* env,
+jclass clazz
+) {
+// TODO: implement nativeDumpRecords()
 }

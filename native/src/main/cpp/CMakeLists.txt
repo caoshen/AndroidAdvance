@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.22.1)
 
 project("native")
 
@@ -6,15 +6,22 @@ project("native")
 # bhook
 find_package(bytehook REQUIRED CONFIG)
 
-add_library(native-lib SHARED native-lib.cpp)
-add_library(native-catcher SHARED native-catcher.cpp)
+# libhacker.so
+add_library(hacker SHARED hacker.c)
+target_compile_features(hacker PUBLIC c_std_11)
+#target_compile_options(hacker PUBLIC -Weverything -Werror)
+target_link_libraries(hacker bytehook::bytehook log)
 
 find_library(log-lib log)
 
 # https://blog.csdn.net/weixin_37625173/article/details/116850396
+# libnative-lib.so
+add_library(native-lib SHARED native-lib.cpp)
 target_link_libraries(native-lib ${log-lib})
+
+# libnative-catcher.so
+add_library(native-catcher SHARED native-catcher.cpp)
 target_link_libraries(native-catcher ${log-lib})
-target_link_libraries(native-lib bytehook::bytehook)
 
 if (USEASAN)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
@@ -27,8 +34,8 @@ endif (USEASAN)
 # debug|armeabi-v7a :hello
 # debug|armeabi-v7a :======================
 # debug|armeabi-v7a :1234
-set(var hello)
-set(var2 1234)
+set(var start)
+set(var2 end)
 
 message(${var})
 message("======================")

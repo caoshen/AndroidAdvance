@@ -5,6 +5,7 @@ buildscript {
     }
     ext.kotlin_version = '1.6.10'
     repositories {
+        mavenCentral()
         maven {
             url uri('repo')
         }
@@ -21,11 +22,10 @@ buildscript {
             url 'https://maven.aliyun.com/repository/gradle-plugin'
         }
 //        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
-        mavenCentral()
     }
     dependencies {
         classpath "com.example.javassist:gradleplugin:1.0.0"
-        classpath 'com.android.tools.build:gradle:7.0.0'
+        classpath 'com.android.tools.build:gradle:7.1.0'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 
@@ -36,6 +36,7 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         maven {
             url 'https://maven.aliyun.com/repository/central'
         }

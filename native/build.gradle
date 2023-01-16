@@ -90,7 +90,7 @@ android {
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
-            version "3.6.0"
+            version "3.22.1"
         }
     }
     ndkVersion "22.1.7171670"
@@ -128,32 +128,36 @@ repositories {
 }
 
 task copyAsanLibs(type: Copy) {
-    def libDir = file("$ndkDir").absolutePath + "/toolchains/llvm/prebuilt/"
-    for (String abi : SupportedABIs) {
-        def dir = new File("${project.projectDir}/asan/libs/" + abi)
-        dir.mkdirs()
-        println "copy to $dir from $libDir"
-        if (abi == 'armeabi-v7a' || abi == 'armeabi')
-            abi = "arm"
-        if (abi == "arm64-v8a")
-            abi = "aarch64"
-        FileTree tree = fileTree(dir: libDir).include("**/*asan*${abi}*.so")
-        tree.each { File file ->
-            println "from ${file.absolutePath} to ${dir.absolutePath}"
-            from file
-            into dir.absolutePath
+    doLast {
+        def libDir = file("$ndkDir").absolutePath + "/toolchains/llvm/prebuilt/"
+        for (String abi : SupportedABIs) {
+            def dir = new File("${project.projectDir}/asan/libs/" + abi)
+            dir.mkdirs()
+            println "copy to $dir from $libDir"
+            if (abi == 'armeabi-v7a' || abi == 'armeabi')
+                abi = "arm"
+            if (abi == "arm64-v8a")
+                abi = "aarch64"
+            FileTree tree = fileTree(dir: libDir).include("**/*asan*${abi}*.so")
+            tree.each { File file ->
+                println "from ${file.absolutePath} to ${dir.absolutePath}"
+                from file
+                into dir.absolutePath
+            }
         }
     }
 }
 
 //这个task将会被generate所依赖
 task createAsanHelpUtilScript(dependsOn: copyAsanLibs) {
-    for (String abi : SupportedABIs) {
-        def dir = new File("${project.projectDir}/asan/res/lib/" + abi)
-        dir.mkdirs()
-        def helpFile = new File(dir, "wrap.sh")
-        generateHelpUtil(helpFile, abi)
-        println "helpFile file path " + helpFile.path
+    doLast {
+        for (String abi : SupportedABIs) {
+            def dir = new File("${project.projectDir}/asan/res/lib/" + abi)
+            dir.mkdirs()
+            def helpFile = new File(dir, "wrap.sh")
+            generateHelpUtil(helpFile, abi)
+            println "helpFile file path " + helpFile.path
+        }
     }
 }
 
