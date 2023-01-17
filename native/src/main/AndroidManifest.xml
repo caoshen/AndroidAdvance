@@ -3,7 +3,8 @@
     package="com.example.nativelib">
 
     <application
-        android:theme="@style/Theme.AppCompat">
+        android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+        android:name=".NativeApplication">
         <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

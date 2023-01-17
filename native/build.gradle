@@ -10,7 +10,7 @@ apply plugin: 'kotlin-android'
 
 def abiFiltersForWrapScript = ['arm64-v8a']
 def SupportedABIs = ['arm64-v8a']
-def useASAN = true
+def useASAN = false
 //    ndkDir = properties.getProperty('ndk.dir')
 def ndkDir = "/Users/caoshen/Library/Android/sdk/ndk/22.1.7171670"
 

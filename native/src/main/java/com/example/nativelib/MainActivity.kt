@@ -1,6 +1,7 @@
 package com.example.nativelib
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -14,10 +15,14 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        findViewById<TextView>(R.id.hello_text).text = getStr()
+//        findViewById<TextView>(R.id.hello_text).text = getStr()
     }
 
-    external fun stringFromJNI(): String
+    fun hookAll(view: View) {
+        NativeHacker.hook(2)
+    }
+
+//    external fun stringFromJNI(): String
 
     // 使用addr2line找行号
     /*
@@ -25,13 +30,13 @@ class MainActivity : AppCompatActivity() {
 Java_com_jingxun_asan_test_MainActivity_getStr
 /Users/wangjing/study/Asan/AddressSanitize/app/.externalNativeBuild/cmake/debug/arm64-v8a/../../../../src/main/cpp/native-lib.cpp:16
      */
-    external fun getStr(): String
+//    external fun getStr(): String
 
-    companion object {
-        init {
-            System.loadLibrary("native-lib")
-        }
-    }
+//    companion object {
+//        init {
+//            System.loadLibrary("native-lib")
+//        }
+//    }
     // Asan 报错
     // ERROR: AddressSanitizer: heap-buffer-overflow on address 0x003c89576c20 at pc 0x006f24d65cec bp 0x007fdc5cdb10 sp 0x007fdc5cdb08
 
