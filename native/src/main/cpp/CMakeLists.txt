@@ -12,6 +12,16 @@ target_compile_features(hacker PUBLIC c_std_11)
 #target_compile_options(hacker PUBLIC -Weverything -Werror)
 target_link_libraries(hacker bytehook::bytehook log)
 
+# libhookee.so
+add_library(hookee SHARED hookee.c)
+target_compile_features(hookee PUBLIC c_std_11)
+target_compile_options(hookee PUBLIC -Weverything -Werror)
+target_link_libraries(hookee log)
+
+# libtestmalloc.so
+add_library(testmalloc SHARED test_malloc.cpp)
+target_link_libraries(testmalloc log)
+
 find_library(log-lib log)
 
 # https://blog.csdn.net/weixin_37625173/article/details/116850396

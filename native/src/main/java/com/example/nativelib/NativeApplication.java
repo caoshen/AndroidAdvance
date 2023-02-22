@@ -19,5 +19,6 @@ public class NativeApplication extends Application {
         Log.i(TAG, "bytehook init, return: " + ret);
 
         System.loadLibrary("hacker");
+        System.loadLibrary("testmalloc");
     }
 }
