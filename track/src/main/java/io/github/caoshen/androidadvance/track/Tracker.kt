@@ -15,7 +15,7 @@ class Tracker {
         }
 
         fun dispatchEvent(event: String, params: TrackParams) {
-            providers.forEach()
+            
         }
     }
 }

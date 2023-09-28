@@ -4,4 +4,3 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-JNIEXPORT jint
